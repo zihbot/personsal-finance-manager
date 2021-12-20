@@ -6,7 +6,7 @@ import lombok.Data;
 public class TransactionDto {
     private Long id;
     private Long amount;
-    private String source;
-    private String target;
+    private Long source;
+    private Long target;
     private String type;
 }
