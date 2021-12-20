@@ -7,6 +7,7 @@ import com.zihbot.pfm.service.TransactionService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class TransactionController {
 	}
 
 	@PostMapping()
-	public String insertTransaction() {
-		return "OK";
+	public TransactionDto insertTransaction(@RequestBody TransactionDto transaction) {
+		return transactionService.insertTransaction(transaction);
 	}
 }

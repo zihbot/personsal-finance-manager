@@ -23,12 +23,29 @@ public class TransactionService {
             .collect(Collectors.toList());
     }
 
+    public TransactionDto insertTransaction(TransactionDto transaction) {
+        transaction.setId(null);
+        Transaction result = transactionRepository.save(this.dtoToModel(transaction));
+        return this.modelToDto(result);
+    }
+
     private TransactionDto modelToDto(Transaction model) {
         TransactionDto dto = new TransactionDto();
+        dto.setId(model.getId());
         dto.setAmount(model.getAmount());
         dto.setSource(model.getSource());
         dto.setTarget(model.getTarget());
         dto.setType(model.getType());
         return dto;
+    }
+
+    private Transaction dtoToModel(TransactionDto dto) {
+        Transaction model = new Transaction();
+        model.setId(dto.getId());
+        model.setAmount(dto.getAmount());
+        model.setSource(dto.getSource());
+        model.setTarget(dto.getTarget());
+        model.setType(dto.getType());
+        return model;
     }
 }
