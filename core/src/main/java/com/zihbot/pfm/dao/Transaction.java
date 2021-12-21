@@ -1,4 +1,4 @@
-package com.zihbot.pfm.model;
+package com.zihbot.pfm.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

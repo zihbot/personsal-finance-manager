@@ -1,9 +1,9 @@
-package com.zihbot.pfm.dto;
+package com.zihbot.pfm.model;
 
 import lombok.Data;
 
 @Data
-public class TransactionDto {
+public class TransactionItemDto {
     private Long id;
     private Long amount;
     private Long source;

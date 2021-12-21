@@ -1,7 +1,7 @@
 package com.zihbot.pfm;
 
-import com.zihbot.pfm.model.Account;
-import com.zihbot.pfm.model.Transaction;
+import com.zihbot.pfm.dao.Account;
+import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.repository.AccountRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
 

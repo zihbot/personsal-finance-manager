@@ -1,4 +1,4 @@
-package com.zihbot.pfm.dto;
+package com.zihbot.pfm.model;
 
 import lombok.Data;
 

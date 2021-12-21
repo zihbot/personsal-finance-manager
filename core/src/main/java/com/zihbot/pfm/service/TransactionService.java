@@ -1,11 +1,10 @@
 package com.zihbot.pfm.service;
 
+import java.security.InvalidParameterException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.zihbot.pfm.dto.TransactionDto;
-import com.zihbot.pfm.model.Account;
-import com.zihbot.pfm.model.Transaction;
+import com.zihbot.pfm.dao.Account;
+import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.repository.AccountRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
 
@@ -19,48 +18,40 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
 
-	public List<TransactionDto> listTransactions() {
+	public List<Transaction> listTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
-        return transactions.stream()
-            .map(m -> modelToDto(m))
-            .collect(Collectors.toList());
+        return transactions;
     }
 
-    public TransactionDto insertTransaction(TransactionDto transaction) {
+    public Transaction insertTransaction(Transaction transaction, Long sourceId, Long targetId) {
+        if (transaction.getAmount() == null || transaction.getAmount() < 0) {
+            throw new InvalidParameterException();
+        }
+
         transaction.setId(null);
-        Transaction result = transactionRepository.save(this.dtoToModel(transaction));
-        return this.modelToDto(result);
-    }
 
-    private TransactionDto modelToDto(Transaction model) {
-        TransactionDto dto = new TransactionDto();
-        dto.setId(model.getId());
-        dto.setAmount(model.getAmount());
-        if (model.getSource() != null) {
-            dto.setSource(model.getSource().getId());
-        }
-        if (model.getTarget() != null) {
-            dto.setTarget(model.getTarget().getId());
-        }
-        dto.setType(model.getType());
-        return dto;
-    }
+        if (sourceId != null) {
+            Account source = accountRepository.getById(sourceId);
+            source.setBalance(source.getBalance() - transaction.getAmount());
+            source = accountRepository.save(source);
 
-    private Transaction dtoToModel(TransactionDto dto) {
-        Transaction model = new Transaction();
-        model.setId(dto.getId());
-        model.setAmount(dto.getAmount());
-        if (dto.getSource() != null) {
-            final Account source = accountRepository.findById(dto.getSource())
-                .orElseThrow(() -> new RuntimeException());
-            model.setSource(source);
+            transaction.setSource(source);
+        } else {
+            transaction.setSource(null);
         }
-        if (dto.getTarget() != null) {
-            final Account target = accountRepository.findById(dto.getTarget())
-                .orElseThrow(() -> new RuntimeException());
-            model.setTarget(target);
+
+        if (targetId != null) {
+            Account target = accountRepository.getById(targetId);
+            target.setBalance(target.getBalance() + transaction.getAmount());
+            target = accountRepository.save(target);
+
+            transaction.setTarget(target);
+        } else {
+            transaction.setSource(null);
         }
-        model.setType(dto.getType());
-        return model;
+
+        transaction = transactionRepository.save(transaction);
+
+        return transaction;
     }
 }
