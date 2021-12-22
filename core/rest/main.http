@@ -1,0 +1,20 @@
+###
+# Get all transactions
+GET {{url}}/transactions
+
+###
+# Add transaction
+POST {{url}}/transactions
+Content-Type: application/json
+
+{
+    "amount": 50000,
+    "targetId": "1",
+    "type": "Átutalás"
+}
+
+###
+# Get all accounts
+GET {{url}}/accounts
+
+###
