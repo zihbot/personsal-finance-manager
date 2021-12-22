@@ -8,4 +8,5 @@ public class TransactionCreateDto {
     private Long sourceId;
     private Long targetId;
     private String type;
+    private Long time;
 }

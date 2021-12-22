@@ -15,4 +15,5 @@ public class Transaction {
     private @ManyToOne Account source;
     private @ManyToOne Account target;
     private String type;
+    private Long time;
 }

@@ -33,6 +33,7 @@ public class TransactionController {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(transactionDto.getAmount());
 		transaction.setType(transactionDto.getType());
+		transaction.setTime(transactionDto.getTime());
 		transaction = transactionService.insertTransaction(
 			transaction,
 			transactionDto.getSourceId(),
@@ -49,6 +50,7 @@ public class TransactionController {
 		result.setTarget(Optional.ofNullable(input.getTarget())
 			.map(t -> t.getId()).orElse(null));
 		result.setType(input.getType());
+		result.setTime(input.getTime());
 		return result;
 	}
 }

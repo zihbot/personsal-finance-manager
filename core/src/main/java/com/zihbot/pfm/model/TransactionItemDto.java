@@ -9,4 +9,5 @@ public class TransactionItemDto {
     private Long source;
     private Long target;
     private String type;
+    private Long time;
 }
