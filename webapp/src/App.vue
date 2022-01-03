@@ -1,17 +1,32 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-  </div>
-  <router-view />
+  <MDBContainer>
+    <div id="nav">
+      <router-link to="/">Home</router-link>
+    </div>
+    <router-view />
+    <MDBBtn color="primary" floating>
+      <MDBIcon icon="download"></MDBIcon>
+    </MDBBtn>
+  </MDBContainer>
 </template>
 
-<style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+<script>
+import { MDBContainer, MDBBtn, MDBIcon } from "mdb-vue-ui-kit";
 
-$image-path: "~@/../mdb/mdbvue/img";
-@import "~@/../mdb/mdbvue/scss/mdb-free.scss";
+export default {
+  name: "App",
+  components: {
+    MDBContainer,
+    MDBBtn,
+    MDBIcon,
+  },
+};
+</script>
+
+<style lang="scss">
+@import "~@/../mdb/scss/index.free.scss";
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 </style>
