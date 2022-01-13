@@ -2,11 +2,21 @@ plugins {
 	id 'org.springframework.boot' version '2.6.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'application'
 }
 
 group = 'com.zihbot.pfm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+
+springBoot {
+	mainClass = 'com.zihbot.pfm.PfmApplication'
+}
+
+tasks.named('bootJar') {
+	archiveBaseName = 'PersonalFinanceManager'
+	archiveFileName = 'PersonalFinanceManager.jar'
+}
 
 configurations {
 	compileOnly {

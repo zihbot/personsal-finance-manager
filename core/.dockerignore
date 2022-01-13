@@ -1,0 +1,8 @@
+.*
+build/*
+rest/*
+gradle/*
+wrapper/*
+*.code-workspace
+gradlew
+gradlew.bat
