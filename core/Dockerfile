@@ -3,12 +3,17 @@
 #COPY ${JAR_FILE} app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
-FROM gradle:7.3.3-jdk17-alpine
+FROM gradle:7.3.3-jdk17-alpine AS builder
+LABEL stage=builder
 WORKDIR /app
-COPY build.gradle /app/
+COPY build.gradle settings.gradle /app/
+RUN [ "gradle", "init" ]
+
+COPY src /app/src
 RUN [ "gradle", "build" ]
 
-COPY * /app/
-RUN [ "gradle", "build" ]
-RUN [ "gradle", "bootJar" ]
-ENTRYPOINT [ "/bin/ash" ]
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY --from=builder /app/build/libs/PersonalFinanceManager.jar ./
+#ENTRYPOINT ["/bin/ash"]
+CMD [ "java", "-jar", "PersonalFinanceManager.jar" ]
