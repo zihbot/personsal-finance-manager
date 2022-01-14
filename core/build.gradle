@@ -5,13 +5,13 @@ plugins {
 	id 'application'
 }
 
-group = 'com.zihbot.pfm'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
 springBoot {
 	mainClass = 'com.zihbot.pfm.PfmApplication'
 }
+
+group = 'com.zihbot.pfm'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 tasks.named('bootJar') {
 	archiveBaseName = 'PersonalFinanceManager'
