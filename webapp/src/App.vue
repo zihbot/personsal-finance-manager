@@ -1,32 +1,30 @@
 <template>
-  <MDBContainer>
+  <ui-grid class="main-grid">
     <div id="nav">
       <router-link to="/">Home</router-link>
     </div>
     <router-view />
-    <MDBBtn color="primary" floating>
-      <MDBIcon icon="download"></MDBIcon>
-    </MDBBtn>
-  </MDBContainer>
+    <router-link to="/newTransaction">
+      <ui-fab style="position: absolute; bottom: 100px; right: 100px">
+        <i class="fas fa-plus fa-lg"></i>
+      </ui-fab>
+    </router-link>
+  </ui-grid>
 </template>
 
 <script>
-import { MDBContainer, MDBBtn, MDBIcon } from "mdb-vue-ui-kit";
-
 export default {
   name: "App",
-  components: {
-    MDBContainer,
-    MDBBtn,
-    MDBIcon,
-  },
+  components: {},
 };
 </script>
 
 <style lang="scss">
-@import "~@/../mdb/scss/index.free.scss";
-
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>
