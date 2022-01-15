@@ -1,9 +1,13 @@
 <template>
   <ui-grid class="main-grid">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    <router-view />
+    <ui-grid-cell class="main-cell" columns="12">
+      <div id="nav">
+        <router-link to="/">Home</router-link>
+      </div>
+    </ui-grid-cell>
+    <ui-grid-cell class="main-cell" columns="12">
+      <router-view />
+    </ui-grid-cell>
     <router-link to="/newTransaction">
       <ui-fab style="position: absolute; bottom: 100px; right: 100px">
         <i class="fas fa-plus fa-lg"></i>

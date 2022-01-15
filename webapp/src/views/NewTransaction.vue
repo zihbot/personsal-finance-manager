@@ -1,14 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col">
-      <h1 :class="$tt('headline1')">New transaction</h1>
-      <ui-textfield
-        helper-text-id="my-text-field-helper-text"
-      >
-        Email Address
-      </ui-textfield>
-    </div>
-  </div>
+  <h1 :class="$tt('headline1')">New transaction</h1>
+  <ui-textfield
+    helper-text-id="my-text-field-helper-text"
+  >
+    Email Address
+  </ui-textfield>
 </template>
 
 <script lang="ts">
