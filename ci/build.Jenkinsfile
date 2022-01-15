@@ -10,7 +10,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/zihbot/personsal-finance-manager.git'
             }
         }
-        stage('Build') {
+        stage('Build core') {
             steps {
                 dir('core') {
                     script {
