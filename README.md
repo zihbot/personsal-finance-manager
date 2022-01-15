@@ -1,1 +1,1 @@
-# personsal-finance-manager
+# Personal Finance Manager
