@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'styles/_custom_material.scss';
+
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 

@@ -1,10 +1,10 @@
 <template>
-  <h1 :class="$tt('headline1')">New transaction</h1>
-  <ui-textfield
+  <h1 :class="$tt('page-name')">New transaction</h1>
+  <p :class="$tt('page-name')"
     helper-text-id="my-text-field-helper-text"
   >
-    Email Address
-  </ui-textfield>
+    0
+  </p>
 </template>
 
 <script lang="ts">

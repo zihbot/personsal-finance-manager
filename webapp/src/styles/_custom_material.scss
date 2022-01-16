@@ -1,0 +1,10 @@
+.mdc-typography--page-name {
+    display: block;
+    font-size: 2em;
+    font-weight: normal;
+    word-wrap: normal;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

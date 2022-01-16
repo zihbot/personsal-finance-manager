@@ -7,4 +7,11 @@ import store from "./store";
 
 import "balm-ui/dist/balm-ui.css";
 
-createApp(App).use(store).use(router).use(BalmUI).use(BalmUIPlus).mount("#app");
+createApp(App)
+    .use(store)
+    .use(router)
+    .use(BalmUI, {
+        $typography: ['page-name']
+    })
+    .use(BalmUIPlus)
+    .mount("#app");
