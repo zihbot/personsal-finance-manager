@@ -35,9 +35,14 @@ export default {
   a {
     text-decoration: none;
   }
+}
 
-  #newTransactionButton {
-    position: absolute;
+#newTransactionButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  @include tablet {
     bottom: 100px;
     right: 100px;
   }
