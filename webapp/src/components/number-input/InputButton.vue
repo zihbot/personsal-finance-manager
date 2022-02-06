@@ -1,6 +1,9 @@
 <template>
   <div class="inputButton" @click="$emit('pushed', text)">
-    {{text}}
+    <span v-if="text == keys.KEY_DEL">
+      <i class="fas fa-backspace"></i>
+    </span>
+    <span v-else>{{text}}</span>
   </div>
 </template>
 <script lang="ts">
@@ -19,6 +22,15 @@ export default {
         || this.text === KEY_DEL && e.key === 'Backspace') {
         e.preventDefault();
         this.$emit('pushed', this.text);
+      }
+    }
+  },
+  // eslint-disable-next-line
+  data() {
+    return {
+      keys: {
+        KEY_DOT,
+        KEY_DEL
       }
     }
   },

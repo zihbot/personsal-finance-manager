@@ -1,12 +1,12 @@
 <template>
-  <div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid full-height">
+  <div class="mdc-layout-grid__inner full-height" style="grid-template-rows: max-content">
     <div class="mdc-layout-grid__cell--span-12">
       <div id="nav">
         <router-link to="/">Home</router-link>
       </div>
     </div>
-    <div id="mainContainer" class="mdc-layout-grid__cell--span-12">
+    <div id="mainContainer" class="mdc-layout-grid__cell--span-12 full-height">
       <router-view />
     </div>
     <router-link to="/newTransaction" v-if="notOnNewTransaction">
