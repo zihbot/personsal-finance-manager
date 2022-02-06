@@ -17,12 +17,16 @@ export default {
   // eslint-disable-next-line
   data() {
     return {
-      amount: '0',
+      amount: this.modelValue ? this.modelValue.toString() : '0',
       keys: [
         '1', '2', '3', '4', '5', '6', '7', '8', '9', KEY_DOT, '0', KEY_DEL
       ]
     };
   },
+  props: {
+    modelValue: Number
+  },
+  emits: ['update:modelValue'],
   methods: {
     pushed(value: string): void {
       switch (value) {
@@ -50,6 +54,13 @@ export default {
       if (!this.amount) {
         this.amount = '0';
       }
+
+      this.$emit('update:modelValue', parseFloat(this.amount));
+    }
+  },
+  watch: {
+    modelValue: function(newVal: number): void {
+      this.amount = newVal.toString();
     }
   }
 }
