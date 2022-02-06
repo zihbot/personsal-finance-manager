@@ -74,13 +74,13 @@ export default {
 
   @include desktop {
     //display: none;
-    max-width: 840px;
+    max-width: $bp-medium;
   }
 }
 
 .amountInput {
   width: 100%;
-  max-width: 840px;
+  max-width: $bp-medium;
   font-size: xx-large;
   text-align: right;
   display: block;

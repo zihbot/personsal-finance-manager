@@ -1,6 +1,10 @@
 <template>
   <h1>New transaction</h1>
   <number-keypad-input />
+  <button class="mdc-button mdc-button--raised" id="nextButton">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">Next</span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -15,3 +19,10 @@ import NumberKeypadInput from '../components/number-input/NumberInput.vue';
 })
 export default class NewTransaction extends Vue {}
 </script>
+<style lang="scss">
+  #nextButton {
+    width: 100%;
+    max-width: $bp-medium;
+    margin-top: 1rem;
+  }
+</style>

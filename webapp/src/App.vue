@@ -6,10 +6,10 @@
         <router-link to="/">Home</router-link>
       </div>
     </div>
-    <div class="mdc-layout-grid__cell--span-12">
+    <div id="mainContainer" class="mdc-layout-grid__cell--span-12">
       <router-view />
     </div>
-    <router-link to="/newTransaction">
+    <router-link to="/newTransaction" v-if="notOnNewTransaction">
       <div class="mdc-fab" id="newTransactionButton">
         <div class="mdc-fab__ripple"></div>
         <i class="fas fa-plus fa-lg"></i>
@@ -19,10 +19,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "App",
   components: {},
+  computed: {
+    notOnNewTransaction(): boolean {
+      return this.$route.name !== 'NewTransaction';
+    }
+  }
 };
 </script>
 
@@ -45,6 +50,15 @@ export default {
   @include desktop {
     bottom: 100px;
     right: 100px;
+  }
+}
+
+#mainContainer {
+  width: 100%;
+
+  @include desktop {
+    width: $bp-medium;
+    margin: 0 auto;
   }
 }
 </style>
