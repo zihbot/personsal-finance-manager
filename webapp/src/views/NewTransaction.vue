@@ -1,5 +1,5 @@
 <template>
-  <h1>New transaction</h1>
+  <h1 class="mdc-typography--headline3">New transaction</h1>
   <number-keypad-input />
   <button class="mdc-button mdc-button--raised" id="nextButton">
     <div class="mdc-button__ripple"></div>

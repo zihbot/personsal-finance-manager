@@ -1,5 +1,5 @@
 <template>
-  <div class="mdc-layout-grid full-height">
+  <div class="mdc-layout-grid full-height mdc-typography">
   <div class="mdc-layout-grid__inner full-height" style="grid-template-rows: max-content">
     <div class="mdc-layout-grid__cell--span-12">
       <div id="nav">
@@ -35,7 +35,7 @@ export default {
 @import "styles/main.scss";
 
 #app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  //font-family: Roboto, Helvetica, Arial, sans-serif;
 
   a {
     text-decoration: none;
