@@ -1,11 +1,11 @@
 <template>
-  <h1 :class="$tt('page-name')">New transaction</h1>
+  <h1>New transaction</h1>
   <number-keypad-input />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import NumberKeypadInput from '../components/NumberInput.vue';
+import NumberKeypadInput from '../components/number-input/NumberInput.vue';
 
 @Options({
   components: {

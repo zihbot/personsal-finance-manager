@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "balm-ui": "^9.40.0",
     "core-js": "^3.6.5",
     "material-components-web": "^5.1.0",
     "vue": "^3.0.0",

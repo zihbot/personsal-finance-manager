@@ -1,0 +1,14 @@
+$bp-small: 960px;
+$bp-medium: 1280px;
+
+@mixin tablet {
+  @media (min-width: #{bp-small}) and (max-width: #{$bp-medium - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{bp-medium}) {
+    @content;
+  }
+}

@@ -1,19 +1,22 @@
 <template>
-  <ui-grid class="main-grid">
-    <ui-grid-cell class="main-cell" columns="12">
+  <div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-12">
       <div id="nav">
         <router-link to="/">Home</router-link>
       </div>
-    </ui-grid-cell>
-    <ui-grid-cell class="main-cell" columns="12">
+    </div>
+    <div class="mdc-layout-grid__cell--span-12">
       <router-view />
-    </ui-grid-cell>
+    </div>
     <router-link to="/newTransaction">
-      <ui-fab style="position: absolute; bottom: 100px; right: 100px">
+      <div class="mdc-fab" id="newTransactionButton">
+        <div class="mdc-fab__ripple"></div>
         <i class="fas fa-plus fa-lg"></i>
-      </ui-fab>
+      </div>
     </router-link>
-  </ui-grid>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +27,12 @@ export default {
 </script>
 
 <style lang="scss">
+@use "@material/layout-grid/mdc-layout-grid";
+//@use "@material/animation/functions";
+@use "@material/fab/mdc-fab";
+
+//@include icon-button.core-styles;
+@import 'styles/_breakpoints.scss';
 @import 'styles/_custom_material.scss';
 
 #app {
@@ -31,6 +40,12 @@ export default {
 
   a {
     text-decoration: none;
+  }
+
+  #newTransactionButton {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
   }
 }
 </style>
