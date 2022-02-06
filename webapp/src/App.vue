@@ -42,7 +42,7 @@ export default {
   bottom: 10px;
   right: 10px;
 
-  @include tablet {
+  @include desktop {
     bottom: 100px;
     right: 100px;
   }

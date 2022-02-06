@@ -8,6 +8,7 @@ module.exports = {
           includePaths: ['./node_modules'],
           quietDeps: true
         },
+        prependData: '@import "~@/styles/vars.scss";'
       },
     }
   }

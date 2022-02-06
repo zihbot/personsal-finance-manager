@@ -58,7 +58,7 @@ export default {
 .inputGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  max-width: 300px;
+  max-width: 100%;
   & :first-child {
     border-radius: 4px 0 0 0;
   }
@@ -71,11 +71,16 @@ export default {
   & :last-child {
     border-radius: 0 0 4px 0;
   }
+
+  @include desktop {
+    //display: none;
+    max-width: 840px;
+  }
 }
 
 .amountInput {
   width: 100%;
-  max-width: 300px;
+  max-width: 840px;
   font-size: xx-large;
   text-align: right;
   display: block;

@@ -1,5 +1,5 @@
-$bp-small: 960px;
-$bp-medium: 1280px;
+$bp-small: 480px;
+$bp-medium: 840px;
 
 @mixin tablet {
   @media (min-width: #{$bp-small}) {
