@@ -6,8 +6,9 @@ module.exports = {
       sass: {
         sassOptions: {
           includePaths: ['./node_modules'],
-        }
-      }
+          quietDeps: true
+        },
+      },
     }
   }
 }

@@ -27,13 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-@use "@material/layout-grid/mdc-layout-grid";
-//@use "@material/animation/functions";
-@use "@material/fab/mdc-fab";
-
-//@include icon-button.core-styles;
-@import 'styles/_breakpoints.scss';
-@import 'styles/_custom_material.scss';
+@import "styles/main.scss";
 
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
