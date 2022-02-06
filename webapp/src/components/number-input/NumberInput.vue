@@ -1,6 +1,6 @@
 <template>
   <span class="amountInput">{{ amount }}</span>
-  <div class="inputGrid">
+  <div class="inputGrid full-height">
     <input-button v-for="key in keys" :key="key"
       :text="key"
       @pushed="pushed" />

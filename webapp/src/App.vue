@@ -55,6 +55,8 @@ export default {
 
 #mainContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   @include desktop {
     width: $bp-medium;

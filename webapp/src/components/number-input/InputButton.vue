@@ -47,8 +47,11 @@ export default {
   border: 1px solid grey;
   //border-radius: 4px;
   padding: 1rem;
-  text-align: center;
   user-select: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     cursor: pointer;
