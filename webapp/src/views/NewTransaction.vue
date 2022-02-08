@@ -10,8 +10,8 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
-import API from '../services/api'
 import NumberKeypadInput from '../components/number-input/NumberKeypadInput.vue';
+import api from "../services/api";
 
 @Options({
   components: {
@@ -25,12 +25,14 @@ import NumberKeypadInput from '../components/number-input/NumberKeypadInput.vue'
   },
   methods: {
     save() {
-      API.saveTransaction({
+      api.saveTransaction({
         amount: this.amount * 100,
         targetId: 0,
         type: 'IN'
       }).subscribe(data => {
         console.log('DATA', data);
+      }, error => {
+        console.error('Cannot create transaction', error);
       });
     }
   }
