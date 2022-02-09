@@ -27,10 +27,10 @@ import api from "../services/api";
     save() {
       api.saveTransaction({
         amount: this.amount * 100,
-        targetId: 0,
+        targetId: 1,
         type: 'IN'
       }).subscribe(data => {
-        console.log('DATA', data);
+        console.log('Finished transaction', data);
       }, error => {
         console.error('Cannot create transaction', error);
       });

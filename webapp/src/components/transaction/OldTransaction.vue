@@ -4,7 +4,7 @@
     <span>{{ transaction.source }}
       <i class="fas fa-arrow-right"></i>
       {{ transaction.target }}</span>
-    <span>{{ transaction.amount }}</span>
+    <span>{{ transaction.amount / 100 }}</span>
   </div>
 </template>
 <script lang="ts">
