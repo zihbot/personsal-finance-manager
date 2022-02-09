@@ -12,6 +12,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableJpaRepositories
@@ -46,4 +48,13 @@ public class PfmConfiguration {
       return txManager;
     }
 
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+      return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+          registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+        }
+      };
+    }
 }
