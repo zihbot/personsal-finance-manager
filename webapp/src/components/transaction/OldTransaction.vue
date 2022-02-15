@@ -1,10 +1,10 @@
 <template >
   <div class="transaction">
-    <span>{{ transaction.type }}</span>
-    <span>{{ transaction.source }}
+    <span class="tr-type">{{ transaction.type }}</span>
+    <span class="tr-accounts">{{ transaction.source }}
       <i class="fas fa-arrow-right"></i>
       {{ transaction.target }}</span>
-    <span>{{ transaction.amount / 100 }}</span>
+    <span class="tr-amount">{{ transaction.amount / 100 }}</span>
   </div>
 </template>
 <script lang="ts">
@@ -28,5 +28,12 @@ export default {
 
   display: flex;
   justify-content: space-between;
+
+  .tr-type, .tr-amount{
+    width: 100px;
+  }
+  .tr-amount {
+    text-align: right;
+  }
 }
 </style>
