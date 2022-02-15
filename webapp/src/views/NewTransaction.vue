@@ -31,6 +31,7 @@ import api from "../services/api";
         type: 'IN'
       }).subscribe(data => {
         console.log('Finished transaction', data);
+        this.$router.push('/');
       }, error => {
         console.error('Cannot create transaction', error);
       });
