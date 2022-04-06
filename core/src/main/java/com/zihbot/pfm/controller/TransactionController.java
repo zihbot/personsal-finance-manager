@@ -3,6 +3,7 @@ package com.zihbot.pfm.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.model.TransactionCreateDto;
 import com.zihbot.pfm.model.TransactionItemDto;
@@ -51,6 +52,8 @@ public class TransactionController {
 			.map(t -> t.getId()).orElse(null));
 		result.setType(input.getType());
 		result.setTime(input.getTime());
+		result.setName(input.getName().getName());
+		result.setLabels(input.getLabels().stream().map(Label::getName).toList());
 		return result;
 	}
 }
