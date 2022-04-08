@@ -52,8 +52,12 @@ public class TransactionController {
 			.map(t -> t.getId()).orElse(null));
 		result.setType(input.getType());
 		result.setTime(input.getTime());
-		result.setName(input.getName().getName());
-		result.setLabels(input.getLabels().stream().map(Label::getName).toList());
+		if (input.getName() != null) {
+			result.setName(input.getName().getName());
+		}
+		if (input.getLabels() != null) {
+			result.setLabels(input.getLabels().stream().map(Label::getName).toList());
+		}
 		return result;
 	}
 }
