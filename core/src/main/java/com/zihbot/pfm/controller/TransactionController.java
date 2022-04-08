@@ -39,6 +39,10 @@ public class TransactionController {
 			transaction,
 			transactionDto.getSourceId(),
 			transactionDto.getTargetId());
+		transaction = transactionService.updateTransactionLabels(
+			transaction,
+			transactionDto.getName(),
+			transactionDto.getLabels());
 		return this.convertToItemDto(transaction);
 	}
 

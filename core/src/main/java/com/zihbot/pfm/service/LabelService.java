@@ -19,7 +19,11 @@ public class LabelService {
         return labels;
     }
 
-    public Label createLabel(String name) {
+    public Label createOrGetLabel(String name) {
+        Label nameLabel = labelRepository.getByName(name);
+        if (nameLabel != null) {
+            return nameLabel;
+        }
         Label label = new Label();
         label.setName(name);
         return insertLabel(label);

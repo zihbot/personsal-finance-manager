@@ -10,7 +10,9 @@ Content-Type: application/json
 {
     "amount": 50000,
     "targetId": "1",
-    "type": "Átutalás"
+    "type": "IN",
+    "name": "Megtakarítás",
+    "labels": ["Utalás", "Másik"]
 }
 
 ###

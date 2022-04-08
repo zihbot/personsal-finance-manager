@@ -1,7 +1,9 @@
 package com.zihbot.pfm.service;
 
 import java.security.InvalidParameterException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.zihbot.pfm.dao.Account;
 import com.zihbot.pfm.dao.Label;
@@ -59,10 +61,17 @@ public class TransactionService {
     }
 
     public Transaction updateTransactionLabels(Transaction transaction, String mainLabel, List<String> labels) {
-        if (transaction.getName() != null
-        && !transaction.getName().getName().equals(mainLabel)) {
-            Label name = labelService.createLabel(mainLabel);
+        if (mainLabel != null) {
+            Label name = labelService.createOrGetLabel(mainLabel);
             transaction.setName(name);
+        }
+
+        if (labels != null) {
+            Set<Label> newLabels = new HashSet<Label>();
+            labels.forEach(label -> {
+                newLabels.add(labelService.createOrGetLabel(label));
+            });
+            transaction.setLabels(newLabels);
         }
 
         return transactionRepository.save(transaction);
