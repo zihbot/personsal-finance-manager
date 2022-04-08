@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        POSTGRES_PASS = credentials('pfm-postgres')
+    }
+
     stages {
         stage('Cleanup') {
             steps {
@@ -16,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def core_image = docker.image 'pfm-core'
-                    def core_container = core_image.run('-p 35682:8080 --name pmf-core')
+                    def core_container = core_image.run('-p 35682:8080 --name pmf-core -e spring.datasource.password=$POSTGRES_PASS_PSW')
                 }
             }
         }
