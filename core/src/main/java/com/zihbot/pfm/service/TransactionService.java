@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 import com.zihbot.pfm.dao.Account;
+import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.repository.AccountRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
@@ -17,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
+
+    private final LabelService labelService;
 
 	public List<Transaction> listTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
@@ -53,5 +56,15 @@ public class TransactionService {
         transaction = transactionRepository.save(transaction);
 
         return transaction;
+    }
+
+    public Transaction updateTransactionLabels(Transaction transaction, String mainLabel, List<String> labels) {
+        if (transaction.getName() != null
+        && !transaction.getName().getName().equals(mainLabel)) {
+            Label name = labelService.createLabel(mainLabel);
+            transaction.setName(name);
+        }
+
+        return transactionRepository.save(transaction);
     }
 }

@@ -19,6 +19,12 @@ public class LabelService {
         return labels;
     }
 
+    public Label createLabel(String name) {
+        Label label = new Label();
+        label.setName(name);
+        return insertLabel(label);
+    }
+
     public Label insertLabel(Label label) {
         label.setId(null);
         if (label.getName() == null) {
