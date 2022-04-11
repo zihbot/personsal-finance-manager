@@ -2,17 +2,21 @@ package com.zihbot.pfm;
 
 import java.util.Set;
 
+import com.zihbot.pfm.configuration.ApplicationConstants;
 import com.zihbot.pfm.dao.Account;
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
+import com.zihbot.pfm.dao.UserAuth;
 import com.zihbot.pfm.repository.AccountRepository;
 import com.zihbot.pfm.repository.LabelRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
+import com.zihbot.pfm.repository.UserAuthRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class PfmApplication {
@@ -21,14 +25,21 @@ public class PfmApplication {
 		SpringApplication.run(PfmApplication.class, args);
 	}
 
-	// TODO: Only for testing
 	@Bean
+	@Profile(ApplicationConstants.PROFILE_DEV)
 	public CommandLineRunner run(
 		TransactionRepository transactionRepository,
 		AccountRepository accountRepository,
-		LabelRepository labelRepository
+		LabelRepository labelRepository,
+		UserAuthRepository userAuthRepository
 	) throws Exception {
 		return (String[] args) -> {
+			UserAuth userAuth = new UserAuth();
+			userAuth.setUsername("user");
+			userAuth.setPassword("BD2D2EA7F21928FC7FF7C0F1D246B9BE");
+			userAuth.setSalt("FA8DA7D7049131A2");
+			userAuthRepository.save(userAuth);
+
 			Account acc = new Account();
 			acc.setBalance(0L);
 			acc.setName("Számla");
