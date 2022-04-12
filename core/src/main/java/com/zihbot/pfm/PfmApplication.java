@@ -17,6 +17,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class PfmApplication {
@@ -31,12 +33,13 @@ public class PfmApplication {
 		TransactionRepository transactionRepository,
 		AccountRepository accountRepository,
 		LabelRepository labelRepository,
-		UserAuthRepository userAuthRepository
+		UserAuthRepository userAuthRepository,
+		PasswordEncoder passwordEncoder
 	) throws Exception {
 		return (String[] args) -> {
 			UserAuth userAuth = new UserAuth();
 			userAuth.setUsername("user");
-			userAuth.setPassword("BD2D2EA7F21928FC7FF7C0F1D246B9BE");
+			userAuth.setPassword(passwordEncoder.encode("user" + "FA8DA7D7049131A2"));
 			userAuth.setSalt("FA8DA7D7049131A2");
 			userAuthRepository.save(userAuth);
 
@@ -60,5 +63,10 @@ public class PfmApplication {
 			t1.setLabels(Set.of(lab2));
 			transactionRepository.save(t1);
 		};
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+			return new BCryptPasswordEncoder();
 	}
 }
