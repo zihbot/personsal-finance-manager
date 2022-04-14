@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor()
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //private final JwtTokenProvider jwtTokenProvider;
     private final Optional<HttpSecurityConfig> httpSecurity;
     private final List<AuthenticationProvider> authProviders;
     private final Optional<JwtAuthenticationFilter> jwtAuthFilter;
