@@ -31,13 +31,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
 
-    System.out.println("token " + token);
     final String username = jwtService.validateToken(token.replace("Bearer ", ""));
     if (username == null) {
       filterChain.doFilter(request, response);
       return;
     }
 
+    System.out.println("user " + username);
     Authentication auth = new PreAuthenticatedAuthenticationToken(username, token);
     SecurityContextHolder.getContext().setAuthentication(auth);
     filterChain.doFilter(request, response);

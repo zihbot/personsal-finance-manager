@@ -1,5 +1,6 @@
 package com.zihbot.pfm.security;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //private final JwtTokenProvider jwtTokenProvider;
     private final Optional<HttpSecurityConfig> httpSecurity;
-    private final Optional<AuthenticationProvider> authProvider;
-    @Nullable
-    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final List<AuthenticationProvider> authProviders;
+    private final Optional<JwtAuthenticationFilter> jwtAuthFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,9 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //if (jwtAuthFilter != null) {
-        http.addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class);
-        //}
+        if (jwtAuthFilter.isPresent()) {
+            http.addFilterBefore(jwtAuthFilter.get(), BasicAuthenticationFilter.class);
+        }
 
         http.formLogin().disable();
 
@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        if (authProvider.isPresent()) {
-            auth.authenticationProvider(authProvider.get());
-        }
+        authProviders.forEach( provider -> {
+            auth.authenticationProvider(provider);
+        });
     }
 }

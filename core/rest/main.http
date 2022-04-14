@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 # Get all accounts
 GET {{url}}/accounts
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ5OTY0MDcyfQ.ATedytpthOS08a2W-gCmXcPvj0yNxD79HI35wL5eWWQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ5OTY1MTY0fQ.2hcoIg1NJtVmEC9hSVogk4-9rTXYjv8aUiZpmkcX6kw
 
 ###
 # Login
