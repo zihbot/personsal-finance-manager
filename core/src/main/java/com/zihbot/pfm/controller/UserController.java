@@ -1,12 +1,15 @@
 package com.zihbot.pfm.controller;
 
 import com.zihbot.pfm.security.JwtService;
+import com.zihbot.pfm.security.UserAuthService;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -14,11 +17,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final JwtService jwtService;
+	private final JwtService jwtService;
+	private final UserAuthService userAuthService;
 
-	@GetMapping("login")
-	public String login() {
-        final String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		return jwtService.createToken(user);
+	@PostMapping("login")
+	public String login(@RequestBody LoginPostDto account) {
+		if (!userAuthService.isAuthenticationValid(account.getUsername(), account.getPassword())) {
+			throw new BadCredentialsException("Invalid credentials");
+		}
+		return jwtService.createToken(account.getUsername());
+	}
+
+	@Data
+	public static class LoginPostDto {
+		private String username;
+		private String password;
 	}
 }

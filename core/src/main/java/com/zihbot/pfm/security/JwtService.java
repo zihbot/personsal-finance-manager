@@ -5,11 +5,15 @@ import java.util.Date;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtService {
+    private final Logger logger = LoggerFactory.getLogger(JwtService.class);
+
     public final String TOKEN_PREFIX = "Bearer ";
 
     private Algorithm algorithm;
@@ -26,9 +30,14 @@ public class JwtService {
     }
 
     public String validateToken(String token) {
-        return JWT.require(algorithm)
-            .build()
-            .verify(token.replace(TOKEN_PREFIX, ""))
-            .getSubject();
+        try {
+            return JWT.require(algorithm)
+                .build()
+                .verify(token.replace(TOKEN_PREFIX, ""))
+                .getSubject();
+        } catch (Exception e) {
+            logger.warn("Wrong token {}", token);
+        }
+        return null;
     }
 }

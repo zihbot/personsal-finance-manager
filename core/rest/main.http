@@ -18,5 +18,16 @@ Content-Type: application/json
 ###
 # Get all accounts
 GET {{url}}/accounts
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ5OTY0MDcyfQ.ATedytpthOS08a2W-gCmXcPvj0yNxD79HI35wL5eWWQ
+
+###
+# Login
+POST {{url}}/users/login
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "user"
+}
 
 ###

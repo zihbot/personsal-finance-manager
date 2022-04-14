@@ -4,24 +4,29 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@RequiredArgsConstructor
+@RequiredArgsConstructor()
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //private final JwtTokenProvider jwtTokenProvider;
     private final Optional<HttpSecurityConfig> httpSecurity;
-    private final AuthenticationProvider authProvider;
+    private final Optional<AuthenticationProvider> authProvider;
+    @Nullable
+    private final JwtAuthenticationFilter jwtAuthFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,7 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
             .antMatchers("/users/login").permitAll()
-            .anyRequest().authenticated();
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        //if (jwtAuthFilter != null) {
+        http.addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class);
+        //}
 
         http.formLogin().disable();
 
@@ -41,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authProvider);
+        if (authProvider.isPresent()) {
+            auth.authenticationProvider(authProvider.get());
+        }
     }
 }
