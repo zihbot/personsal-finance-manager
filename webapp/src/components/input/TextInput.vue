@@ -1,18 +1,26 @@
 <template>
-  <div>
-    <input v-model="value">
-    {{label}}
+  <div class="input">
+    <label :for="id">
+      {{label ?? id}}
+    </label>
+    <input
+      v-model="value"
+      :type="type"
+      :id="id"
+      :name="id"
+    >
   </div>
 </template>
 
 <script lang="ts">
 import { Vue } from 'vue-class-component'
-import { Prop } from 'vue-property-decorator'
+import { Model, Prop } from 'vue-property-decorator'
 
 export default class TextInput extends Vue {
-  @Prop() label: string = '';
-  value: string = '';
-
+  @Prop() label!: string;
+  @Prop() type: string = 'text';
+  @Prop() id: string = 'input';
+  @Model('modelValue') value!: string;
 }
 </script>
 
