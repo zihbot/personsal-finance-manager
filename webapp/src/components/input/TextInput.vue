@@ -1,13 +1,16 @@
 <template>
-  <div class="input">
+  <div class="input" :class="{focus: focused}" @click.prevent="$refs.inputRef.focus()">
     <label :for="id">
       {{label ?? id}}
     </label>
     <input
       v-model="value"
+      ref="inputRef"
       :type="type"
       :id="id"
       :name="id"
+      @focus="focused = true"
+      @blur="focused = false"
     >
   </div>
 </template>
@@ -21,9 +24,39 @@ export default class TextInput extends Vue {
   @Prop() type: string = 'text';
   @Prop() id: string = 'input';
   @Model('modelValue') value!: string;
+
+  private focused = false;
 }
 </script>
 
 <style lang="scss">
-
+.input {
+  border: 1px $app-black solid;
+  background-color: $app-primary-light;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 400px;
+  margin: 0.5rem 0 1rem;
+  label {
+    font-size: 0.8em;
+    color: $app-disabled;
+  }
+  input {
+    font-size: 1.3em;
+    &, &:active, &:focus {
+      appearance: none;
+      border: 0;
+      background: none;
+      outline: 0;
+    }
+  }
+  &.focus {
+    border-color: $app-primary;
+    label {
+      color: $app-black;
+    }
+    color: $app-black;
+  }
+}
 </style>

@@ -1,1 +1,6 @@
 @import "breakpoints";
+
+$app-black: #0e0e0e;
+$app-disabled: #5d5d5d;
+$app-primary: #069465;
+$app-primary-light: lighten($app-primary, 60%);
