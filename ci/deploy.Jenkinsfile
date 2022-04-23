@@ -9,10 +9,10 @@ pipeline {
         stage('Cleanup') {
             steps {
                 catchError (stageResult: 'SUCCESS', buildResult: null) {
-                    sh 'docker stop $(docker ps -aq -f "name=pmf-*")'
+                    sh 'docker stop $(docker ps -aq -f "name=pfm-*")'
                 }
                 catchError (stageResult: 'SUCCESS', buildResult: null) {
-                    sh 'docker rm $(docker ps -aq -f "name=pmf-*")'
+                    sh 'docker rm $(docker ps -aq -f "name=pfm-*")'
                 }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def core_image = docker.image 'pfm-core'
-                    def core_container = core_image.run('-p 35682:8080 --name pmf-core -e spring.datasource.password=$POSTGRES_PASS_PSW')
+                    def core_container = core_image.run('-p 35682:8080 --name pfm-core -e spring.datasource.password=$POSTGRES_PASS_PSW')
                 }
             }
         }
