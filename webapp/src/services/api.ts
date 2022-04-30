@@ -1,35 +1,66 @@
 import { ajax, AjaxResponse } from 'rxjs/ajax'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Observable, OperatorFunction } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { API_URL } from '../config'
+import auth from './auth'
 import { TransactionDto } from '@/models/api/transactions';
 
 class API {
   apiUrl = API_URL;
 
+  login(payload: {username: string, password: string}): Observable<any> {
+    return this.post('/users/login', payload, {responseType: 'text'});
+  }
+
   saveTransaction(payload: {amount: number, targetId: number, type: string}): Observable<any> {
-    return this.post(this.apiUrl + '/transactions', payload)
-    .pipe(this.responseOperator);
+    return this.post('/transactions', payload);
   }
 
   getAllTransactions(): Observable<TransactionDto[]> {
-    return this.get(this.apiUrl + '/transactions')
-    .pipe(this.responseOperator);
+    return this.get('/transactions');
   }
 
   responseOperator = map((res: AjaxResponse) => res.response);
 
-  private post(url: string, body?: any, headers?: any): Observable<AjaxResponse> {
-    return ajax.post(url, body, {
-      'Content-Type': 'application/json',
-      ...(headers ?? {})
-    })
+  private post(url: string, body?: any, params?: {headers?: any, responseType?: string}): Observable<any> {
+    return this.request({
+      method: 'POST',
+      url,
+      body,
+      headers: params?.headers,
+      responseType: params?.responseType
+    });
   }
 
-  private get(url: string, headers?: any): Observable<AjaxResponse> {
-    return ajax.get(url, {
-      ...(headers ?? {})
-    })
+  private get(url: string): Observable<any> {
+    return this.request({
+      method: 'GET',
+      url
+    });
+  }
+
+  private request(params: {
+    [key: string]: any;
+    url: string;
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    body?: any;
+    headers?: { [key: string]: string };
+    responseType?: string;
+  }, mapper?: OperatorFunction<AjaxResponse, any>): Observable<any> {
+    const $ajax = ajax({
+      url: this.apiUrl + params.url,
+      method: params.method,
+      headers: {
+        'Content-Type': 'application/json',
+        ...auth.getAuthHeader(),
+        ...params.headers
+      },
+      body: params.body,
+      responseType: params.responseType ?? 'json'
+    });
+    return $ajax
+      .pipe(tap(val => console.log('Response', val.status, val.response)))
+      .pipe(mapper ?? this.responseOperator);
   }
 }
 

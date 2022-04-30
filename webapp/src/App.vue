@@ -1,5 +1,5 @@
 <template>
-  <div class="mdc-layout-grid full-height mdc-typography">
+  <div class="mdc-layout-grid full-height mdc-typography" :class="sizeClass">
   <div class="mdc-layout-grid__inner full-height" style="grid-template-rows: max-content">
     <div class="mdc-layout-grid__cell--span-12">
       <div id="nav">
@@ -26,6 +26,22 @@ export default {
   computed: {
     notOnNewTransaction(): boolean {
       return this.$route.name !== 'NewTransaction';
+    },
+    sizeClass(): string[] {
+      const classes = [] as string[];
+      const bpMobile = 720;
+      const bpTablet = 1080;
+      const width = window.innerWidth;
+      if (width < bpMobile) {
+        classes.push('mobile');
+      }
+      if (width >= bpMobile && width < bpTablet) {
+        classes.push('tablet');
+      }
+      if (width >= bpTablet) {
+        classes.push('desktop');
+      }
+      return classes;
     }
   }
 };
