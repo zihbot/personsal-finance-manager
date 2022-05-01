@@ -27,7 +27,7 @@ import api from "../services/api";
     save() {
       api.saveTransaction({
         amount: this.amount * 100,
-        targetId: 1,
+        targetId: 2,
         type: 'IN'
       }).subscribe(data => {
         console.log('Finished transaction', data);
