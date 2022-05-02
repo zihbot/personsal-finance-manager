@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 const path = require("path");
-console.log('route', path);
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -15,6 +14,14 @@ export default defineConfig({
       scss: {
         additionalData: `@import "@/styles/vars.scss";`
       },
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://zihbot.eu:35682',
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 });
