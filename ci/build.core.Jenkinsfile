@@ -12,12 +12,8 @@ pipeline {
         }
         stage('Build core') {
             steps {
-                dir('core') {
-                    script {
-                        sh "mkdir -p ${WORKSPACE}/pfm-core-cache"
-                        sh "docker run --rm -v ./:/app -v ${WORKSPACE}/pfm-core-cache:/cache -e GRADLE_USER_HOME=/cache -w /app gradle:7-jdk18-alpine gradle build"
-                    }
-                }
+                sh "mkdir -p ${WORKSPACE}/pfm-core-cache"
+                sh "docker run --rm -v ${WORKSPACE}/core:/app -v ${WORKSPACE}/pfm-core-cache:/cache -e GRADLE_USER_HOME=/cache -w /app gradle:7-jdk18-alpine gradle build"
             }
         }
         stage('Archive') {
