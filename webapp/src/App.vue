@@ -1,21 +1,19 @@
 <template>
-  <div class="mdc-layout-grid full-height mdc-typography" :class="sizeClass">
-  <div class="mdc-layout-grid__inner full-height" style="grid-template-rows: max-content">
-    <div class="mdc-layout-grid__cell--span-12">
+  <div class="full-height" :class="sizeClass">
+    <div v-if="showTopbar">
       <div id="nav">
         <router-link to="/">Home</router-link>
       </div>
     </div>
-    <div id="mainContainer" class="mdc-layout-grid__cell--span-12 full-height">
+    <div id="mainContainer" class="full-height">
       <router-view />
     </div>
-    <router-link to="/newTransaction" v-if="notOnNewTransaction">
+    <router-link to="/newTransaction" v-if="showAddButton">
       <div class="mdc-fab" id="newTransactionButton">
         <div class="mdc-fab__ripple"></div>
         <i class="fas fa-plus fa-lg"></i>
       </div>
     </router-link>
-  </div>
   </div>
 </template>
 
@@ -24,8 +22,22 @@ export default {
   name: "App",
   components: {},
   computed: {
-    notOnNewTransaction(): boolean {
-      return this.$route.name !== 'NewTransaction';
+    showAddButton(): boolean {
+      switch(this.$route.name) {
+        case 'Login':
+        case 'NewTransaction':
+          return false;
+        default:
+          return true;
+      }
+    },
+    showTopbar(): boolean {
+      switch(this.$route.name) {
+        case 'Login':
+          return false;
+        default:
+          return true;
+      }
     },
     sizeClass(): string[] {
       const classes = [] as string[];
@@ -51,7 +63,7 @@ export default {
 @import "styles/main.scss";
 
 #app {
-  //font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 
   a {
     text-decoration: none;
@@ -71,12 +83,9 @@ export default {
 
 #mainContainer {
   width: 100%;
+  max-width: $bp-medium;
   display: flex;
   flex-direction: column;
-
-  @include desktop {
-    width: $bp-medium;
-    margin: 0 auto;
-  }
+  margin: 0 auto;
 }
 </style>

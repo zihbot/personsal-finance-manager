@@ -31,13 +31,14 @@ export default class TextInput extends Vue {
 
 <style lang="scss">
 .input {
-  border: 1px $app-black solid;
-  background-color: $app-primary-light;
+  border: 2px $app-black solid;
+  border-radius: .7rem;
   display: flex;
   flex-direction: column;
   padding: 10px;
   width: 400px;
   margin: 0.5rem 0 1rem;
+  background-color: $app-body-background;
   label {
     font-size: 0.8em;
     color: $app-disabled;

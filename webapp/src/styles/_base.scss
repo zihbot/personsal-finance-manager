@@ -1,0 +1,9 @@
+@import "vars";
+
+body {
+  margin: 0;
+  padding: 1rem;
+  height: calc(100% - 2rem);
+  overflow: hidden;
+  background-color: $app-body-background;
+}

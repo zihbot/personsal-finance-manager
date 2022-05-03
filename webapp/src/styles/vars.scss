@@ -3,4 +3,6 @@
 $app-black: #0e0e0e;
 $app-disabled: #5d5d5d;
 $app-primary: #069465;
-$app-primary-light: lighten($app-primary, 60%);
+$app-body-background: mix(white, $app-primary, 95%);
+$app-box-background: #ffffff;
+$app-button-color: mix(white, $app-primary, 40%);

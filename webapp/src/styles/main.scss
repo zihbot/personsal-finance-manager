@@ -3,4 +3,6 @@
 @use "@material/button/mdc-button";
 @use "@material/typography/mdc-typography";
 
+@import 'base';
+@import 'inputs';
 @import 'utils';
