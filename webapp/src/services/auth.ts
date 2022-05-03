@@ -1,4 +1,5 @@
 class Auth {
+  private loggedIn = false;
   private username?: string;
   private jwtToken?: string;
 
@@ -7,6 +8,7 @@ class Auth {
     username: string,
     token: string
   }) {
+    this.loggedIn = params.loggedin;
     if (!params.loggedin) {
       this.jwtToken = undefined;
       this.username = undefined;
@@ -25,6 +27,10 @@ class Auth {
     return {
       Authorization: `Bearer ${this.jwtToken}`
     }
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 }
 
