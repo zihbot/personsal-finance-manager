@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                scmSkip(deleteBuild: true, skipPattern:'^((?!server).)*\|.*$')
                 git branch: 'main', url: 'https://github.com/zihbot/personsal-finance-manager.git'
             }
         }
