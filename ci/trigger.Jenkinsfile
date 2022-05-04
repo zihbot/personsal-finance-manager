@@ -4,7 +4,10 @@ pipeline {
     stages {
         stage('Start core build') {
             when {
-                changeset "core/**"
+                anyOf {
+                    changeset "core/**"
+                    changeset "ci/build.core.Jenkinsfile"
+                }
             }
             steps {
                 build job: 'pfm-build-core'
