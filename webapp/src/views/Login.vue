@@ -4,8 +4,8 @@
     <h1>Login</h1>
     <TextInput label="Username" id="username" v-model="username"></TextInput>
     <TextInput label="Password" id="password" type="password" v-model="password"></TextInput>
-    <button class="primary full-width" @click="login()">Login</button>
     <span>{{ error }}</span>
+    <button class="primary full-width" @click="login()">Login</button>
   </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default class Login extends Vue {
 #loginContainer {
   margin: auto;
   border-radius: 1rem;
-  background-color: $app-box-background;
+  background-color: $app-main-background;
   display: flex;
   align-items: center;
   justify-content: center;

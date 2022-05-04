@@ -3,9 +3,9 @@
 $app-black: #0e0e0e;
 $app-disabled: #5d5d5d;
 $app-primary: #069465;
-$app-body-background: mix(white, $app-primary, 95%);
-$app-body-background-lighter: mix(white, $app-primary, 98%);
-$app-body-background-darker: mix(white, $app-primary, 92%);
-$app-box-background: #ffffff;
+$app-colored-background: mix(white, $app-primary, 95%);
+$app-colored-background-lighter: mix(white, $app-primary, 98%);
+$app-colored-background-darker: mix(white, $app-primary, 92%);
+$app-main-background: #ffffff;
 $app-button: mix(black, $app-primary, 40%);
 $app-button-background: mix(white, $app-primary, 95%);

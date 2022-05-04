@@ -1,8 +1,8 @@
 <template>
   <div class="full-height" :class="sizeClass">
-    <div v-if="showTopbar">
+    <div id="topbar" v-if="showTopbar">
       <div id="nav">
-        <router-link to="/">Home</router-link>
+        <router-link to="/home">Home</router-link>
       </div>
     </div>
     <div id="mainContainer" class="full-height">
@@ -86,6 +86,19 @@ export default {
   max-width: $bp-medium;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 1rem auto 0;
+  background-color: $app-main-background;
+}
+
+#topbar {
+  background-color: $app-primary;
+  color: white;
+  a {
+    display: inline-block;
+    padding: 1rem;
+    &:hover {
+      background-color: lighten($color: $app-primary, $amount: 3);
+    }
+  }
 }
 </style>

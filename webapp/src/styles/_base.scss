@@ -2,8 +2,12 @@
 
 body {
   margin: 0;
-  padding: 1rem;
+  padding: 0;
   height: calc(100% - 2rem);
   overflow: hidden;
-  background-color: $app-body-background;
+  background-color: $app-main-background;
+}
+a:any-link {
+  color: unset;
+  text-decoration: unset;
 }

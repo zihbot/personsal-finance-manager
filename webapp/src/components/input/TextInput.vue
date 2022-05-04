@@ -39,7 +39,7 @@ export default class TextInput extends Vue {
   padding: 10px;
   width: 400px;
   margin: 0.5rem 0 1rem;
-  background-color: $app-body-background;
+  background-color: $app-colored-background;
   label {
     font-size: 0.8em;
     color: $app-disabled;
@@ -53,14 +53,14 @@ export default class TextInput extends Vue {
   }
   &.focus {
     border-color: $app-primary;
-    background-color: darken($color: $app-body-background-darker, $amount: 3);
+    background-color: darken($color: $app-colored-background-darker, $amount: 3);
     label {
       color: $app-primary;
     }
     color: $app-black;
   }
   &:hover:not(.focus) {
-    background-color: $app-body-background-darker;
+    background-color: $app-colored-background-darker;
   }
 }
 </style>
