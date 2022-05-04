@@ -1,6 +1,7 @@
 <template>
   <div id="loginContainer">
   <div>
+    <h1>Login</h1>
     <TextInput label="Username" id="username" v-model="username"></TextInput>
     <TextInput label="Password" id="password" type="password" v-model="password"></TextInput>
     <button class="primary full-width" @click="login()">Login</button>
