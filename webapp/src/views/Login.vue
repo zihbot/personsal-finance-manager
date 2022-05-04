@@ -3,7 +3,7 @@
   <div>
     <TextInput label="Username" id="username" v-model="username"></TextInput>
     <TextInput label="Password" id="password" type="password" v-model="password"></TextInput>
-    <button @click="login()">Login</button>
+    <button class="primary full-width" @click="login()">Login</button>
     <span>{{ error }}</span>
   </div>
   </div>
@@ -44,8 +44,8 @@ export default class Login extends Vue {
   justify-content: center;
 
   .tablet &, .desktop & {
-    width: 600px;
-    height: 400px;
+    width: 100%;
+    height: 80%;
   }
 }
 

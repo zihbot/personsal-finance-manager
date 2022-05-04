@@ -31,8 +31,9 @@ export default class TextInput extends Vue {
 
 <style lang="scss">
 .input {
-  border: 2px $app-black solid;
-  border-radius: .7rem;
+  border-bottom: 2px $app-black solid;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -44,20 +45,22 @@ export default class TextInput extends Vue {
     color: $app-disabled;
   }
   input {
-    font-size: 1.3em;
-    &, &:active, &:focus {
-      appearance: none;
-      border: 0;
-      background: none;
-      outline: 0;
-    }
+    appearance: none;
+    font-size: 1.5em;
+    border: 0;
+    background: none;
+    outline: 0;
   }
   &.focus {
     border-color: $app-primary;
+    background-color: darken($color: $app-body-background-darker, $amount: 3);
     label {
-      color: $app-black;
+      color: $app-primary;
     }
     color: $app-black;
+  }
+  &:hover:not(.focus) {
+    background-color: $app-body-background-darker;
   }
 }
 </style>
