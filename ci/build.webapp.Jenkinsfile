@@ -16,7 +16,7 @@ pipeline {
         stage('Archive') {
             steps {
                 dir ('webapp/dist') {
-                    archiveArtifacts artifacts: '*'
+                    archiveArtifacts artifacts: '*,**/'
                 }
             }
         }
