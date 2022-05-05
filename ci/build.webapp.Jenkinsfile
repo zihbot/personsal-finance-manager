@@ -15,7 +15,10 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'webapp/dist/**'
+                dir('webapp') {
+                    sh "zip -r dist.zip dist"
+                    archiveArtifacts artifacts: 'dist.zip'
+                }
             }
         }
     }
