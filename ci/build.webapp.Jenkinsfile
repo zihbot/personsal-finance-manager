@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: '**/dist/*'
+                archiveArtifacts artifacts: '**/dist/**'
             }
         }
     }
