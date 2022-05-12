@@ -5,4 +5,6 @@ export interface TransactionDto {
   target?: number;
   type?: string;
   time?: number;
+  labels?: string[];
+  name?: string;
 }

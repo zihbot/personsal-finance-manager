@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators'
 import { API_URL } from '../config'
 import auth from './auth'
 import { TransactionDto } from '@/models/api/transactions';
+import { AccountDto } from '@/models/api/accounts'
 
 class API {
   apiUrl = API_URL;
@@ -18,6 +19,10 @@ class API {
 
   getAllTransactions(): Observable<TransactionDto[]> {
     return this.get('/transactions');
+  }
+
+  getAllAccounts(): Observable<AccountDto[]> {
+    return this.get('/accounts');
   }
 
   responseOperator = map((res: AjaxResponse) => res.response);

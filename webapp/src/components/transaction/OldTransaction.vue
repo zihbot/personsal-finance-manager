@@ -1,19 +1,29 @@
 <template >
   <div class="transaction">
     <span class="tr-type">{{ transaction.type }}</span>
-    <span class="tr-accounts">{{ transaction.source }}
+    <span class="tr-accounts">
+      {{ sourceName }}
       <i class="fas fa-arrow-right"></i>
-      {{ transaction.target }}</span>
+      {{ targetName }}
+    </span>
     <span class="tr-amount">{{ transaction.amount / 100 }}</span>
   </div>
 </template>
 <script lang="ts">
+import data from '@/services/data';
+import { Vue } from 'vue-class-component'
+import { Prop } from 'vue-property-decorator';
 import { TransactionDto } from '../../models/api/transactions'
 
-export default {
-  name: 'OldTransaction',
-  props: {
-    transaction: Object as () => TransactionDto
+export default class OldTransaction extends Vue {
+  @Prop()
+  transaction!: TransactionDto;
+
+  get targetName(): string {
+    return data.getAccount(this.transaction.target)?.name ?? '';
+  }
+  get sourceName(): string {
+    return data.getAccount(this.transaction.source)?.name ?? '';
   }
 }
 </script>
