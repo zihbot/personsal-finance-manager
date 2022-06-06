@@ -3,17 +3,19 @@
     <div id="topbar" v-if="showTopbar">
       <div id="nav">
         <router-link to="/home">Home</router-link>
+        <router-link to="/new-transaction">Add transaction</router-link>
+        <router-link to="/accounts">Accounts</router-link>
       </div>
     </div>
     <div id="mainContainer" class="full-height">
       <router-view />
     </div>
-    <router-link to="/newTransaction" v-if="showAddButton">
+    <!--router-link to="/newTransaction" v-if="showAddButton">
       <div class="mdc-fab" id="newTransactionButton">
         <div class="mdc-fab__ripple"></div>
         <i class="fas fa-plus fa-lg"></i>
       </div>
-    </router-link>
+    </router-link-->
   </div>
 </template>
 

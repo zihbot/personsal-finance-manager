@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: "/newTransaction",
+    path: "/new-transaction",
     name: "NewTransaction",
     component: NewTransaction,
   },
