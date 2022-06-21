@@ -5,6 +5,10 @@ import api from "./api";
 class Data {
   accounts?: AccountDto[];
 
+  setAccounts(accounts: AccountDto[]) {
+    this.accounts = accounts;
+  }
+
   loadAccounts(cache = true): Observable<void> {
     if (cache && this.accounts) {
       return of();

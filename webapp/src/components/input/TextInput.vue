@@ -1,5 +1,5 @@
 <template>
-  <div class="input" :class="{focus: focused}" @click.prevent="$refs.inputRef.focus()">
+  <div class="input" :class="{focus: focused}" @click.prevent="focusref()">
     <label :for="id">
       {{label ?? id}}
     </label>
@@ -25,7 +25,11 @@ export default class TextInput extends Vue {
   @Prop() id: string = 'input';
   @Model('modelValue') value!: string;
 
-  private focused = false;
+  public focused = false;
+
+  focusref() {
+    (this.$refs.inputRef as HTMLInputElement).focus();
+  }
 }
 </script>
 
