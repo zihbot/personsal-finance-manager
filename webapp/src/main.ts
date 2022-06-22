@@ -3,9 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import TextInput from "./components/input/TextInput.vue";
+import filters from "./services/filters";
 
-createApp(App)
+const app = createApp(App)
     .use(store)
     .use(router)
-    .component('TextInput', TextInput)
-    .mount("#app");
+    .component('TextInput', TextInput);
+
+app.config.globalProperties.$filter = filters;
+
+app.mount("#app");
