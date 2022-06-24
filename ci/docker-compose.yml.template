@@ -16,6 +16,8 @@ services:
       - 35691:8080
     environment:
       - spring.datasource.password=${POSTGRES_PASS_PSW}
+      - spring.datasource.url=jdbc:postgresql://pfm-db-dev:5432/postgres
+      - spring.jpa.hibernate.ddl-auto=update
     command: java -jar /app/PersonalFinanceManager.jar
     volumes:
       - ${WORKSPACE}/ci/core:/app
