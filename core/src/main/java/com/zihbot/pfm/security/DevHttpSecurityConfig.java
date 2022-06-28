@@ -13,7 +13,7 @@ public class DevHttpSecurityConfig implements HttpSecurityConfig {
 
     @Override
     public void configure(HttpSecurity security) throws Exception {
-        security.httpBasic();
+        //security.httpBasic();
     }
 
     @Override
