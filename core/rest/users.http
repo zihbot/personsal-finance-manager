@@ -1,0 +1,10 @@
+
+# Login
+POST {{url}}/users/login
+
+{
+    "username": "user",
+    "password": "user"
+}
+
+###

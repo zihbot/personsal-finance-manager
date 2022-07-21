@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
-@Profile(ApplicationConstants.PROFILE_DEV)
+//@Component
+//@Profile(ApplicationConstants.PROFILE_DEV)
 @RequiredArgsConstructor
 public class DevAuthProvider implements AuthenticationProvider {
     private final UserAuthService userAuthService;

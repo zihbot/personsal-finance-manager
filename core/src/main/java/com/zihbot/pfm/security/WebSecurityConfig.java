@@ -1,7 +1,6 @@
 package com.zihbot.pfm.security;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -22,30 +21,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor()
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final Optional<HttpSecurityConfig> httpSecurity;
     private final List<AuthenticationProvider> authProviders;
-    private final Optional<JwtAuthenticationFilter> jwtAuthFilter;
+    private final List<PfmAuthFilter> authFilters;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Disable CSRF (cross site request forgery)
-        http.csrf().disable();
-
-        http.authorizeRequests()
+        http = http
+        .csrf()
+            .disable()
+        .authorizeRequests()
             .antMatchers("/users/login").permitAll()
             .anyRequest().authenticated()
             .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and();
 
-        if (jwtAuthFilter.isPresent()) {
-            http.addFilterBefore(jwtAuthFilter.get(), BasicAuthenticationFilter.class);
+        for (var filter : authFilters) {
+            http = http.addFilterBefore(filter, BasicAuthenticationFilter.class);
         }
 
         http.formLogin().disable();
-
-        if (httpSecurity.isPresent()) {
-            httpSecurity.get().configure(http);
-        }
     }
 
     @Autowired

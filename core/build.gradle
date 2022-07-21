@@ -41,7 +41,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.hsqldb:hsqldb:2.6.1'
+	implementation/*TODO: testImplementation*/ 'org.hsqldb:hsqldb:2.6.1'
 }
 
 test {

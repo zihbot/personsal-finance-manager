@@ -5,6 +5,16 @@
 		}
 	],
 	"settings": {
-		"java.configuration.updateBuildConfiguration": "automatic"
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"rest-client.defaultHeaders": {
+			"User-Agent": "vscode-restclient",
+			"Content-Type": "application/json"
+		},
+		"rest-client.environmentVariables": {
+			"local": {
+				"url": "localhost:8080",
+			},
+			"$shared": {}
+		}
 	}
 }
