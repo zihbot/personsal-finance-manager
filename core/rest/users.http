@@ -1,8 +1,6 @@
 
 # Login
-POST http://zihbot.eu:35690/api/users/login
-Origin: http://pfm-webapp
-Referer: http://pfm-webapp/
+POST {{url}}/users/login
 
 {
     "username": "user",

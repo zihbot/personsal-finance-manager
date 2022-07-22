@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://zihbot.eu:35682',
+        target: 'http://zihbot.eu:35691',
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
