@@ -1,6 +1,8 @@
 
 # Login
-POST {{url}}/users/login
+POST http://zihbot.eu:35690/api/users/login
+Origin: http://localhost:4200
+Referer: http://localhost:4200/
 
 {
     "username": "user",
