@@ -24,5 +24,10 @@ pipeline {
                 build job: 'pfm-build-webapp'
             }
         }
+        stage('Start deploy') {
+            steps {
+                build job: 'pfm-deploy-dev'
+            }
+        }
     }
 }

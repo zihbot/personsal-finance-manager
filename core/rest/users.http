@@ -1,8 +1,8 @@
 
 # Login
 POST http://zihbot.eu:35690/api/users/login
-Origin: http://localhost:4200
-Referer: http://localhost:4200/
+Origin: http://pfm-webapp
+Referer: http://pfm-webapp/
 
 {
     "username": "user",
