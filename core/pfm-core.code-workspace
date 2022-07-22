@@ -8,7 +8,8 @@
 		"java.configuration.updateBuildConfiguration": "automatic",
 		"rest-client.defaultHeaders": {
 			"User-Agent": "vscode-restclient",
-			"Content-Type": "application/json"
+			"Content-Type": "application/json",
+			"Authorization": "XXXPFMXXX"
 		},
 		"rest-client.environmentVariables": {
 			"local": {
