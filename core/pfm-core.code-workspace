@@ -12,7 +12,7 @@
 		},
 		"rest-client.environmentVariables": {
 			"local": {
-				"url": "localhost:8080",
+				"url": "http://localhost:8080",
 			},
 			"$shared": {}
 		}

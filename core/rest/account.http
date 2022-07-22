@@ -1,0 +1,4 @@
+GET {{url}}/accounts
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjU4NDIxNTMwfQ.2sNNkqVuVRWDuV4lgL7dZNS08Yuofz-rgU8KiFroCgk
+
+###
