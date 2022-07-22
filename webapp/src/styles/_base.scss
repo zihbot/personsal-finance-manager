@@ -3,9 +3,11 @@
 body {
   margin: 0;
   padding: 0;
-  height: calc(100% - 2rem);
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   background-color: $app-main-background;
+  position: absolute;
 }
 a:any-link {
   color: unset;

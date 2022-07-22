@@ -30,10 +30,10 @@ export default class OldTransaction extends Vue {
 <style lang="scss">
 .transaction {
   width: 100%;
+  box-sizing: border-box;
   border: 1px solid black;
   border-radius: 10px;
   background-color: whitesmoke;
-  margin: 0.25rem;
   padding: 1rem;
 
   display: flex;

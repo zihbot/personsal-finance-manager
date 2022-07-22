@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="layout-page-padding-around">
     <old-transaction v-for="tr in transactions" :key="tr?.id" :transaction="tr" />
   </div>
 </template>

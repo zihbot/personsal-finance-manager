@@ -1,5 +1,5 @@
 <template>
-  <div class="full-height" :class="sizeClass">
+  <div id="root" class="full-height" :class="sizeClass">
     <div id="topbar" v-if="showTopbar">
       <div id="nav">
         <router-link to="/home">Home</router-link>
@@ -7,7 +7,7 @@
         <router-link to="/accounts">Accounts</router-link>
       </div>
     </div>
-    <div id="mainContainer" class="full-height">
+    <div id="pageContainer" class="full-height">
       <router-view />
     </div>
     <!--router-link to="/newTransaction" v-if="showAddButton">
@@ -72,6 +72,11 @@ export default {
   }
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 #newTransactionButton {
   position: absolute;
   bottom: 10px;
@@ -83,13 +88,13 @@ export default {
   }
 }
 
-#mainContainer {
+#pageContainer {
   width: 100%;
   max-width: $bp-medium;
   display: flex;
   flex-direction: column;
-  margin: 1rem auto 0;
   background-color: $app-main-background;
+  overflow: scroll;
 }
 
 #topbar {

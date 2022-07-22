@@ -41,7 +41,8 @@ export default class TextInput extends Vue {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  width: 400px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0.5rem 0 1rem;
   background-color: $app-colored-background;
   label {

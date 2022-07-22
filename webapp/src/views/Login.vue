@@ -1,5 +1,5 @@
 <template>
-  <div id="loginContainer">
+  <div id="loginContainer" class="layout-page-middle-box">
   <div>
     <h1>Login</h1>
     <TextInput label="Username" id="username" v-model="username"></TextInput>
@@ -50,9 +50,7 @@ export default class Login extends Vue {
 
 <style lang="scss">
 #loginContainer {
-  margin: auto;
   border-radius: 1rem;
-  background-color: $app-main-background;
   display: flex;
   align-items: center;
   justify-content: center;
