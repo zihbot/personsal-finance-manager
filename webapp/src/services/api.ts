@@ -25,6 +25,10 @@ class API {
     return this.get('/accounts');
   }
 
+  addAccount(payload: {name: string}) {
+    return this.post('/accounts', payload);
+  }
+
   responseOperator = map((res: AjaxResponse) => res.response);
 
   private post(url: string, body?: any, params?: {headers?: any, responseType?: string}): Observable<any> {

@@ -20,10 +20,10 @@ import { Vue } from 'vue-class-component'
 import { Model, Prop } from 'vue-property-decorator'
 
 export default class TextInput extends Vue {
-  @Prop() label!: string;
+  @Prop() label: string = '';
   @Prop() type: string = 'text';
   @Prop() id: string = 'input';
-  @Model('modelValue') value!: string;
+  @Model('modelValue') value: string = '';
 
   public focused = false;
 
@@ -43,6 +43,7 @@ export default class TextInput extends Vue {
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
+  min-width: 100px;
   margin: 0.5rem 0 1rem;
   background-color: $app-colored-background;
   label {
