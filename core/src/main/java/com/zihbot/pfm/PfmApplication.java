@@ -2,8 +2,11 @@ package com.zihbot.pfm;
 
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import com.zihbot.pfm.configuration.ApplicationConstants;
 import com.zihbot.pfm.dao.Account;
+import com.zihbot.pfm.dao.Category;
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.dao.UserAuth;
@@ -34,6 +37,7 @@ public class PfmApplication {
 		AccountRepository accountRepository,
 		LabelRepository labelRepository,
 		UserAuthRepository userAuthRepository,
+		EntityManager em,
 		PasswordEncoder passwordEncoder
 	) throws Exception {
 		return (String[] args) -> {
@@ -55,8 +59,15 @@ public class PfmApplication {
 			lab2.setName("Értékpapírszámla");
 			labelRepository.save(lab2);
 
+			Category cat = new Category();
+			cat.setColor("#348923");
+			cat.setIcon("arrow");
+			cat.setId(1L);
+			cat.setName("Kategória");
+			em.persist(cat);
+
 			Transaction t1 = new Transaction();
-			t1.setType("IN");
+			t1.setCategory(cat);
 			t1.setAmount(1000000L);
 			t1.setTarget(acc);
 			t1.setName(lab1);

@@ -3,6 +3,9 @@ package com.zihbot.pfm.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
+import com.zihbot.pfm.dao.Category;
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.model.TransactionCreateDto;
@@ -21,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
 public class TransactionController {
+	private final EntityManager em;
 	private final TransactionService transactionService;
 
 	@GetMapping()
@@ -33,7 +37,7 @@ public class TransactionController {
 	public TransactionItemDto insertTransaction(@RequestBody TransactionCreateDto transactionDto) {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(transactionDto.getAmount());
-		transaction.setType(transactionDto.getType());
+		transaction.setCategory(em.find(Category.class, transactionDto.getCategory()));
 		transaction.setTime(transactionDto.getTime());
 		transaction = transactionService.insertTransaction(
 			transaction,
@@ -54,7 +58,7 @@ public class TransactionController {
 			.map(s -> s.getId()).orElse(null));
 		result.setTarget(Optional.ofNullable(input.getTarget())
 			.map(t -> t.getId()).orElse(null));
-		result.setType(input.getType());
+		result.setCategory(input.getCategory().getId());
 		result.setTime(input.getTime());
 		if (input.getName() != null) {
 			result.setName(input.getName().getName());

@@ -18,7 +18,7 @@ public class Transaction {
     private Long amount;
     private @ManyToOne Account source;
     private @ManyToOne Account target;
-    private String type;
+    private Category category;
     private Long time;
     private @ManyToOne Label name;
     private @ManyToMany Set<Label> labels;

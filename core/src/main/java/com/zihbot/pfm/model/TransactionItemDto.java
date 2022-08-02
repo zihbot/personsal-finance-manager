@@ -10,7 +10,7 @@ public class TransactionItemDto {
     private Long amount;
     private Long source;
     private Long target;
-    private String type;
+    private Long category;
     private Long time;
     private String name;
     private List<String> labels;
