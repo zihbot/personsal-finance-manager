@@ -2,8 +2,6 @@ package com.zihbot.pfm;
 
 import java.util.Set;
 
-import javax.persistence.EntityManager;
-
 import com.zihbot.pfm.configuration.ApplicationConstants;
 import com.zihbot.pfm.dao.Account;
 import com.zihbot.pfm.dao.Category;
@@ -11,6 +9,7 @@ import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.dao.UserAuth;
 import com.zihbot.pfm.repository.AccountRepository;
+import com.zihbot.pfm.repository.CategoryRepository;
 import com.zihbot.pfm.repository.LabelRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
 import com.zihbot.pfm.repository.UserAuthRepository;
@@ -37,7 +36,7 @@ public class PfmApplication {
 		AccountRepository accountRepository,
 		LabelRepository labelRepository,
 		UserAuthRepository userAuthRepository,
-		EntityManager em,
+		CategoryRepository categoryRepository,
 		PasswordEncoder passwordEncoder
 	) throws Exception {
 		return (String[] args) -> {
@@ -62,9 +61,8 @@ public class PfmApplication {
 			Category cat = new Category();
 			cat.setColor("#348923");
 			cat.setIcon("arrow");
-			cat.setId(1L);
 			cat.setName("Kategória");
-			em.persist(cat);
+			categoryRepository.save(cat);
 
 			Transaction t1 = new Transaction();
 			t1.setCategory(cat);
