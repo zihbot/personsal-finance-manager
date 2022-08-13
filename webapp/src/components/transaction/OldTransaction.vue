@@ -4,7 +4,9 @@
     <span class="tr-name">
       {{ transaction.name }}
     </span>
-    <span class="tr-amount">{{ transaction.amount / 100 }}</span>
+    <span class="tr-amount">
+      {{ $filter.money(transaction.amount) }}
+    </span>
   </div>
 </template>
 <script lang="ts">
@@ -40,11 +42,10 @@ export default class OldTransaction extends Vue {
   padding: 1rem;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: .5rem;
 
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: rgb(27, 27, 27);
 
   .tr-type, .tr-amount{
@@ -52,6 +53,7 @@ export default class OldTransaction extends Vue {
   }
   .tr-amount {
     text-align: right;
+    margin-left: auto;
   }
 }
 </style>
