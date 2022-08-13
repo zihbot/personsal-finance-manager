@@ -3,8 +3,10 @@ package com.zihbot.pfm.model;
 import com.zihbot.pfm.dao.Category;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class CategoryDto {
     private Long id;
     private String name;

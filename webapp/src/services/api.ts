@@ -5,6 +5,7 @@ import { API_URL } from '../config'
 import auth from './auth'
 import { TransactionDto } from '@/models/api/transactions';
 import { AccountDto } from '@/models/api/accounts'
+import data from './data'
 
 class API {
   apiUrl = API_URL;
@@ -22,16 +23,16 @@ class API {
   }
 
   getAllAccounts(): Observable<AccountDto[]> {
-    return this.get('/accounts');
+    return this.get('/accounts').pipe(tap(d => data.accounts.set(d)));
   }
 
   addAccount(payload: {name: string}) {
     return this.post('/accounts', payload);
   }
 
-  responseOperator = map((res: AjaxResponse) => res.response);
+  responseOperator = map((res: AjaxResponse<any>) => res.response);
 
-  private post(url: string, body?: any, params?: {headers?: any, responseType?: string}): Observable<any> {
+  private post(url: string, body?: any, params?: {headers?: any, responseType?: XMLHttpRequestResponseType}): Observable<any> {
     return this.request({
       method: 'POST',
       url,
@@ -54,8 +55,8 @@ class API {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     body?: any;
     headers?: { [key: string]: string };
-    responseType?: string;
-  }, mapper?: OperatorFunction<AjaxResponse, any>): Observable<any> {
+    responseType?: XMLHttpRequestResponseType;
+  }, mapper?: OperatorFunction<AjaxResponse<any>, any>): Observable<any> {
     const $ajax = ajax({
       url: this.apiUrl + params.url,
       method: params.method,

@@ -3,8 +3,10 @@ package com.zihbot.pfm.model;
 import com.zihbot.pfm.dao.Account;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class AccountDto {
     private Long id;
     private String name;

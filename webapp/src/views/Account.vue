@@ -35,14 +35,13 @@ export default class Account extends Vue {
   newAccountName = '';
 
   mounted(): void {
-    this.accounts = data.accounts ?? [];
+    data.accounts.subscribe(sub => {
+      this.accounts = sub.data;
+    })
   }
 
   addAccount(): void {
     api.addAccount({name: this.newAccountName}).subscribe(res => {
-      data.loadAccounts(false).subscribe(res => {
-        this.accounts = data.accounts ?? [];
-      });
       this.showNewAccountInput = false;
       this.newAccountName = '';
     }, error => {});

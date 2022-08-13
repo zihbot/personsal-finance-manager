@@ -1,28 +1,49 @@
 import { AccountDto } from "@/models/api/accounts";
-import { Observable, of, from } from 'rxjs'
-import api from "./api";
+import { Observable, of, from, BehaviorSubject } from 'rxjs'
 
-class Data {
-  accounts?: AccountDto[];
+class DataSubject<T> extends BehaviorSubject<{loading: boolean, error?: string, data: T}>{
+  nullvalue: T;
 
-  setAccounts(accounts: AccountDto[]) {
-    this.accounts = accounts;
+  constructor(data: T, nullvalue?: T) {
+    super({loading: true, data: data});    
+    this.nullvalue = nullvalue ?? data;
   }
 
-  loadAccounts(cache = true): Observable<void> {
-    if (cache && this.accounts) {
-      return of();
-    }
-    return from(new Promise<void>((resolve, reject) => {
-      api.getAllAccounts().subscribe(data => {
-        this.accounts = data;
-        resolve();
-      }, error => reject());
-    }));
+  set(data: T) {
+    this.next({
+      loading: false,
+      error: undefined,
+      data: data
+    })
+  }
+
+  error(error: string) {
+    this.next({
+      loading: false,
+      error: error,
+      data: this.nullvalue
+    })
+  }
+
+  loading(clean = false) {
+    const newdata = clean ? this.nullvalue : this.getValue().data;
+    this.next({
+      loading: true,
+      error: undefined,
+      data: newdata
+    })
+  }
+}
+
+class Data {
+  accounts = new DataSubject<AccountDto[]>([]);
+
+  setAccounts(accounts: AccountDto[]) {
+    this.accounts.set(accounts);
   }
 
   getAccount(id?: number): AccountDto | undefined {
-    return this.accounts?.find(acc => acc.id === id);
+    return this.accounts.getValue().data.find(acc => acc.id === id);
   }
 }
 
