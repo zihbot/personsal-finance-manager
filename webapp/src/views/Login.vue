@@ -29,10 +29,9 @@ export default class Login extends Vue {
     api.login(payload).subscribe(
       token => {
         auth.setLogin({username: this.username, token: token, loggedin: true});
-        api.getAllAccounts().subscribe(
+        api.getUserData().subscribe(
           accounts => {
             this.$router.push('/home');
-            data.setAccounts(accounts);
             this.loading = false;
           }, error => {
             this.error = 'Communication error';

@@ -42,6 +42,7 @@ export default class Account extends Vue {
 
   addAccount(): void {
     api.addAccount({name: this.newAccountName}).subscribe(res => {
+      api.getAllAccounts().subscribe();
       this.showNewAccountInput = false;
       this.newAccountName = '';
     }, error => {});

@@ -1,3 +1,4 @@
+import { UserDataDto } from './../models/api/common.d';
 import { ajax, AjaxResponse } from 'rxjs/ajax'
 import { Observable, OperatorFunction } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
@@ -29,6 +30,15 @@ class API {
   addAccount(payload: {name: string}) {
     return this.post('/accounts', payload);
   }
+
+  getUserData(): Observable<UserDataDto> {
+    return this.get('/configs/userdata').pipe(tap(d => {
+      data.accounts.set(d.accounts);
+      data.categories.set(d.categories);
+    }));
+  }
+
+  // ******** helpers **********
 
   responseOperator = map((res: AjaxResponse<any>) => res.response);
 

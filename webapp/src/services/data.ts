@@ -1,3 +1,4 @@
+import { CategoryDto } from './../models/api/categories.d';
 import { AccountDto } from "@/models/api/accounts";
 import { Observable, of, from, BehaviorSubject } from 'rxjs'
 
@@ -37,10 +38,7 @@ class DataSubject<T> extends BehaviorSubject<{loading: boolean, error?: string, 
 
 class Data {
   accounts = new DataSubject<AccountDto[]>([]);
-
-  setAccounts(accounts: AccountDto[]) {
-    this.accounts.set(accounts);
-  }
+  categories = new DataSubject<CategoryDto[]>([]);
 
   getAccount(id?: number): AccountDto | undefined {
     return this.accounts.getValue().data.find(acc => acc.id === id);
