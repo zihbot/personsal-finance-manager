@@ -20,7 +20,6 @@ export default class CategoryIcon extends Vue {
   color: rgb(233, 233, 233);
   border-radius: 50%;
   background-color: rgb(76, 76, 190);
-  margin: auto;
   display: flex;
   i {
     margin: auto;

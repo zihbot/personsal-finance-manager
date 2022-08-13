@@ -25,23 +25,15 @@ public class AccountController {
 	public List<AccountDto> listAccounts() {
 		List<Account> accounts = accountService.listAccounts();
         return accounts.stream()
-            .map(m -> convertToDto(m))
+            .map(m -> new AccountDto(m))
             .collect(Collectors.toList());
 	}
 
 	@PostMapping()
 	public AccountDto insertAccount(@RequestBody AccountDto account) {
         Account result = accountService.insertAccount(convertToDao(account));
-		return convertToDto(result);
+		return new AccountDto(result);
 	}
-
-    private AccountDto convertToDto(final Account input) {
-        AccountDto result = new AccountDto();
-        result.setId(input.getId());
-        result.setBalance(input.getBalance());
-        result.setName(input.getName());
-        return result;
-    }
 
     private Account convertToDao(final AccountDto input) {
         Account result = new Account();
