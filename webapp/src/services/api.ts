@@ -15,7 +15,15 @@ class API {
     return this.post('/users/login', payload, {responseType: 'text'});
   }
 
-  saveTransaction(payload: {amount: number, targetId: number, type: string}): Observable<any> {
+  saveTransaction(payload: {
+      amount: number, 
+      sourceId?: number,
+      targetId?: number, 
+      category?: number, 
+      time?: number,
+      name?: string,
+      labels?: string[]
+  }): Observable<any> {
     return this.post('/transactions', payload);
   }
 
