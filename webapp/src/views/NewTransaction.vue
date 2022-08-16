@@ -5,11 +5,11 @@
       <number-keypad-input v-model="amount" />
       <button class="primary full-width" id="nextButton" @click="next('category')">OK</button>
     </template>
-    <div v-if="page === 'category'" class="full-height">
+    <div v-if="page === 'category'" class="full-height flex-column">
       <category-icon v-for="category of categories"
           class="tr-category"
           :class="{selected: selected.category === category.id}"
-          @click="selected.category = category.id "
+          @click="selected.category = category.id"
       />
       <button class="primary full-width" id="saveButton" @click="save()">Save</button>
     </div>
@@ -24,6 +24,7 @@ import CategoryIcon from '../components/transaction/CategoryIcon.vue';
 import api from "@/services/api";
 import { CategoryDto } from "@/models/api/categories";
 import data from "@/services/data";
+import { AccountDto } from "@/models/api/accounts";
 
 type Pages = 'amount' | 'category';
 
@@ -38,14 +39,14 @@ export default class NewTransaction extends Vue {
   saving = false;
   page: Pages = 'amount';
   categories = [] as CategoryDto[];
+  accounts = [] as AccountDto[];
   selected: {
     category?: number
   } = {};
   
   mounted(): void {
-    data.categories.subscribe(sub => {
-      this.categories = sub.data;
-    })
+    data.categories.subscribe(sub => this.categories = sub.data);
+    data.accounts.subscribe(sub => this.accounts = sub.data);
   }
 
   next(page: Pages) {
@@ -55,7 +56,7 @@ export default class NewTransaction extends Vue {
   save() {
     api.saveTransaction({
       amount: this.amount * 100,
-      sourceId: 0,
+      sourceId: this.accounts[0].id,
       category: this.selected.category,
       time: new Date().valueOf(),
     }).subscribe(data => {
