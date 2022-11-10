@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthorizationService {
-	@Value("${pfm.auth.root:root}") private final String rootUsername;
+	@Value("${pfm.auth.root:root}") private String rootUsername;
 
 	public String username() {
         return SecurityContextHolder.getContext().getAuthentication().getName();

@@ -23,8 +23,9 @@ public class UserController {
 	private final AuthorizationService authoritationService;
 
 
-	@PostMapping
+	@PostMapping("")
 	public String createUser(@RequestBody CreateUserRequest account) {
+		System.out.println("CREATE"+account.getUsername());
 		if (!authoritationService.isRoot()) {
 			throw new AccessDeniedException("Forbidden");
 		}
@@ -33,6 +34,7 @@ public class UserController {
 
 	@PostMapping("login")
 	public String login(@RequestBody LoginPostDto account) {
+		System.out.println("LOGIN"+account.getUsername());
 		if (!userAuthService.isAuthenticationValid(account.getUsername(), account.getPassword())) {
 			throw new BadCredentialsException("Invalid credentials");
 		}

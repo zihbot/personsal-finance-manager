@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter implements PfmAuthFilter {
   private final JwtService jwtService;
+
+  private final Logger log = LoggerFactory.getLogger(getClass());
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -36,6 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter implements Pfm
       return;
     }
 
+    log.info("Token for {}", username);
     Authentication auth = new PreAuthenticatedAuthenticationToken(username, token);
     SecurityContextHolder.getContext().setAuthentication(auth);
     filterChain.doFilter(request, response);
