@@ -6,6 +6,8 @@ import com.zihbot.pfm.service.AuthorizationService;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +24,20 @@ public class UserController {
 	private final UserAuthService userAuthService;
 	private final AuthorizationService authoritationService;
 
-
 	@PostMapping("")
 	public void createUser(@RequestBody CreateUserRequest account) {
 		if (!authoritationService.isRoot()) {
 			throw new AccessDeniedException("Forbidden");
 		}
 		userAuthService.createUser(account.getUsername(), account.getPassword());
+	}
+
+	@DeleteMapping("/{username}")
+	public void createUser(@PathVariable String username) {
+		if (!authoritationService.isRoot()) {
+			throw new AccessDeniedException("Forbidden");
+		}
+		userAuthService.deleteUser(username);
 	}
 
 	@PostMapping("login")

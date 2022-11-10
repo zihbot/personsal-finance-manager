@@ -8,6 +8,16 @@ Cypress.Commands.add("createUser", (username=TESTUSER, password=TESTPASS, ...arg
         return res.body;
     }).then(rootToken => {
     cy.request({
+        method: 'DELETE',
+        url: `${BASEURL}/users/${username}`,
+        headers: {
+            'Authorization': `Bearer ${rootToken}`
+        },
+        failOnStatusCode: false
+    }).then(res => {
+        return rootToken;
+    }).then(rootToken => {
+    cy.request({
         method: 'POST',
         url: `${BASEURL}/users`,
         headers: {
@@ -17,8 +27,7 @@ Cypress.Commands.add("createUser", (username=TESTUSER, password=TESTPASS, ...arg
             username,
             password
         },
-        //failOnStatusCode: false
     }).then(res => {
         rootToken = res.body;
-    })})
+    })})})
 })
