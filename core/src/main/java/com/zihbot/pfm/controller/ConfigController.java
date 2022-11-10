@@ -24,10 +24,10 @@ public class ConfigController {
 	@GetMapping("userdata")
 	public UserDataDto getUserData() {
 		List<AccountDto> accounts = accountService.listAccounts().stream()
-                .map(m -> new AccountDto(m))
+                .map(AccountDto::new)
                 .toList();
         List<CategoryDto> categories = categoryService.listCategories().stream()
-                .map(m -> new CategoryDto(m))
+                .map(CategoryDto::new)
                 .toList();
         
         UserDataDto result = new UserDataDto();

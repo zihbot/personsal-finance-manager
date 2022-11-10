@@ -31,11 +31,11 @@ public class CategoryController {
 
 	@PostMapping()
 	public CategoryDto insertAccount(@RequestBody CategoryDto category) {
-        Category result = categoryService.insertCategory(convertToDao(category));
+        Category result = categoryService.insertCategory(convertToEntity(category));
 		return new CategoryDto(result);
 	}
 
-    private Category convertToDao(final CategoryDto input) {
+    private Category convertToEntity(final CategoryDto input) {
         Category result = new Category();
         result.setId(input.getId());
         result.setName(input.getName());

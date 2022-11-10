@@ -22,7 +22,7 @@ public class LabelController {
 	public List<String> listLabels() {
 		List<Label> labels = labelService.listLabels();
         return labels.stream()
-            .map(m -> convertToDto(m))
+            .map(this::convertToDto)
             .collect(Collectors.toList());
 	}
 
@@ -30,7 +30,7 @@ public class LabelController {
         return input.getName();
     }
 
-    private Label convertToDao(final String input) {
+    private Label convertToEntity(final String input) {
         Label result = new Label();
         result.setName(input);
         return result;

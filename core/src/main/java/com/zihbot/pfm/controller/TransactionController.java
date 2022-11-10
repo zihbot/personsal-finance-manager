@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import com.zihbot.pfm.dao.Account;
 import com.zihbot.pfm.dao.Category;
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.dao.Transaction;
@@ -55,9 +56,9 @@ public class TransactionController {
 		result.setId(input.getId());
 		result.setAmount(input.getAmount());
 		result.setSource(Optional.ofNullable(input.getSource())
-			.map(s -> s.getId()).orElse(null));
+			.map(Account::getId).orElse(null));
 		result.setTarget(Optional.ofNullable(input.getTarget())
-			.map(t -> t.getId()).orElse(null));
+			.map(Account::getId).orElse(null));
 		result.setCategory(input.getCategory().getId());
 		result.setTime(input.getTime());
 		if (input.getName() != null) {

@@ -31,11 +31,11 @@ public class AccountController {
 
 	@PostMapping()
 	public AccountDto insertAccount(@RequestBody AccountDto account) {
-        Account result = accountService.insertAccount(convertToDao(account));
+        Account result = accountService.insertAccount(convertToEntity(account));
 		return new AccountDto(result);
 	}
 
-    private Account convertToDao(final AccountDto input) {
+    private Account convertToEntity(final AccountDto input) {
         Account result = new Account();
         result.setId(input.getId());
         result.setBalance(input.getBalance());
