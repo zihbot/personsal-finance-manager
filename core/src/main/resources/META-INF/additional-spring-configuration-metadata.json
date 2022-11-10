@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "pfm.auth.root",
+  "type": "java.lang.String",
+  "description": "The username of the root user"
+}]}

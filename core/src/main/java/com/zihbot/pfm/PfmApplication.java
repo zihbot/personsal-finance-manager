@@ -38,8 +38,14 @@ public class PfmApplication {
 		UserAuthRepository userAuthRepository,
 		CategoryRepository categoryRepository,
 		PasswordEncoder passwordEncoder
-	) throws Exception {
+	) {
 		return (String[] args) -> {
+			UserAuth rootUserAuth = new UserAuth();
+			rootUserAuth.setUsername("root");
+			rootUserAuth.setPassword(passwordEncoder.encode("root" + "LT1LJ4LUZD8T67TI"));
+			rootUserAuth.setSalt("LT1LJ4LUZD8T67TI");
+			userAuthRepository.save(rootUserAuth);
+
 			UserAuth userAuth = new UserAuth();
 			userAuth.setUsername("user");
 			userAuth.setPassword(passwordEncoder.encode("user" + "FA8DA7D7049131A2"));

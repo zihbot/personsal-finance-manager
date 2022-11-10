@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DevAuthenticationFilter extends OncePerRequestFilter implements PfmAuthFilter {
     private static final String DEBUG_TOKEN = "XXXPFMXXX";
-    
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -33,10 +33,10 @@ public class DevAuthenticationFilter extends OncePerRequestFilter implements Pfm
             filterChain.doFilter(request, response);
             return;
         }
-    
+
         Authentication auth = new PreAuthenticatedAuthenticationToken("demouser", token);
         SecurityContextHolder.getContext().setAuthentication(auth);
-        filterChain.doFilter(request, response);                
+        filterChain.doFilter(request, response);
     }
 
 }
