@@ -23,12 +23,13 @@ import lombok.RequiredArgsConstructor;
 @Profile(ApplicationConstants.PROFILE_DEV)
 @RequiredArgsConstructor
 public class DevAuthenticationFilter extends OncePerRequestFilter implements PfmAuthFilter {
+    private static final String DEBUG_TOKEN = "XXXPFMXXX";
     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (token == null || !token.equals("XXXPFMXXX")) {
+        if (token == null || !token.equals(DEBUG_TOKEN)) {
             filterChain.doFilter(request, response);
             return;
         }
