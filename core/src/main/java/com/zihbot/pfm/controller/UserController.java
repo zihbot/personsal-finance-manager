@@ -24,17 +24,15 @@ public class UserController {
 
 
 	@PostMapping("")
-	public String createUser(@RequestBody CreateUserRequest account) {
-		System.out.println("CREATE"+account.getUsername());
+	public void createUser(@RequestBody CreateUserRequest account) {
 		if (!authoritationService.isRoot()) {
 			throw new AccessDeniedException("Forbidden");
 		}
-		return jwtService.createToken(account.getUsername());
+		userAuthService.createUser(account.getUsername(), account.getPassword());
 	}
 
 	@PostMapping("login")
 	public String login(@RequestBody LoginPostDto account) {
-		System.out.println("LOGIN"+account.getUsername());
 		if (!userAuthService.isAuthenticationValid(account.getUsername(), account.getPassword())) {
 			throw new BadCredentialsException("Invalid credentials");
 		}

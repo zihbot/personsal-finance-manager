@@ -11,7 +11,7 @@ Cypress.Commands.add("createUser", (username=TESTUSER, password=TESTPASS, ...arg
         method: 'POST',
         url: `${BASEURL}/users`,
         headers: {
-            'Authorization': 'XXXPFMXXX'//`Bearer ${rootToken}`
+            'Authorization': `Bearer ${rootToken}`
         },
         body: {
             username,

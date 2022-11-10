@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class JwtService {
     private final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    public final String TOKEN_PREFIX = "Bearer ";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
     private Algorithm algorithm;
 
