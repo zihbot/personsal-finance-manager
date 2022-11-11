@@ -12,4 +12,17 @@ describe('01 Account Management', () => {
             expect(res.body.categories).to.have.length(0);
         });
     });
+
+    it('02 Add account', () => {
+        cy.request({
+            method: 'POST',
+            url: `/accounts`,
+            body: {
+                name: 'Debit card'
+            }
+        });
+        cy.request({ method: 'GET', url: `/accounts` }).then(({body}) => {
+            expect(body).to.have.length(1);
+        });
+    });
 });

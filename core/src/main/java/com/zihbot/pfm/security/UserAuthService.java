@@ -2,6 +2,7 @@ package com.zihbot.pfm.security;
 
 import com.zihbot.pfm.dao.UserAuth;
 import com.zihbot.pfm.repository.UserAuthRepository;
+import com.zihbot.pfm.service.PfmUserService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class UserAuthService {
 
   private final UserAuthRepository authRepo;
   private final PasswordEncoder passwordEncoder;
+  private final PfmUserService pfmUserService;
 
   public boolean isAuthenticationValid(String username, String password) {
 
@@ -32,6 +35,7 @@ public class UserAuthService {
     return passwordEncoder.matches(password + userAuth.getSalt(), userAuth.getPassword());
   }
 
+  @Transactional
   public void createUser(String username, String password) {
     logger.info("Create user {}", username);
 
@@ -55,8 +59,10 @@ public class UserAuthService {
     user.setPassword(passwordEncoder.encode(password + salt));
     user.setSalt(salt);
     authRepo.save(user);
+    pfmUserService.createUser(username);
   }
 
+  @Transactional
   public void deleteUser(String username) {
     logger.info("Delete user {}", username);
 
@@ -65,5 +71,6 @@ public class UserAuthService {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
     authRepo.deleteById(user.getId());
+    pfmUserService.deleteUser(username);
   }
 }
