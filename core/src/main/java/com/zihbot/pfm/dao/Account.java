@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Account {
     private @Id @GeneratedValue Long id;
-    private @ManyToOne PfmUser user;
+    private String user;
     private String name;
     private Long balance;
 

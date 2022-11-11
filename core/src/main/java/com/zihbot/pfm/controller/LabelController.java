@@ -29,10 +29,4 @@ public class LabelController {
     private String convertToDto(final Label input) {
         return input.getName();
     }
-
-    private Label convertToEntity(final String input) {
-        Label result = new Label();
-        result.setName(input);
-        return result;
-    }
 }

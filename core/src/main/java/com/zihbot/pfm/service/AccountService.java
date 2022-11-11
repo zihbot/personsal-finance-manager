@@ -12,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
+    private final AuthorizationService authService;
     private final AccountRepository accountRepository;
 
 	public List<Account> listAccounts() {
-        List<Account> accounts = accountRepository.findAll();
-        return accounts;
+        return accountRepository.findAllByUser(authService.username());
     }
 
     public Account insertAccount(Account account) {

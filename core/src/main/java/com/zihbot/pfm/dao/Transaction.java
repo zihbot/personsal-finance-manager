@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Transaction {
     private @Id @GeneratedValue Long id;
-    private @ManyToOne PfmUser user;
+    private String user;
     private Long amount;
     private @ManyToOne Account source;
     private @ManyToOne Account target;

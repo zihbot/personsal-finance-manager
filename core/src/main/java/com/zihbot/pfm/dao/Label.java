@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Label {
     private @Id @GeneratedValue Long id;
-    private @ManyToOne PfmUser user;
+    private String user;
     private String name;
     private @ManyToMany(mappedBy = "labels") Set<Transaction> connections;
     private @OneToMany(mappedBy = "name") Set<Transaction> transactions;

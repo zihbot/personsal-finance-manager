@@ -3,7 +3,6 @@ package com.zihbot.pfm.dao;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +11,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Category {
     private @Id @GeneratedValue Long id;
-    private @ManyToOne PfmUser user;
+    private String user;
     private String name;
     private String icon;
     private String color;
