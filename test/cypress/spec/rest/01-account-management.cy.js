@@ -9,7 +9,7 @@ describe('01 Account Management', () => {
     it('01 Empty userdata', () => {
         cy.request({method: 'GET', url: `/configs/userdata`}).then(res => {
             expect(res.body.accounts).to.have.length(0);
-            expect(res.body.accounts).to.have.length(0);
+            expect(res.body.categories).to.have.length(0);
         });
     });
 });

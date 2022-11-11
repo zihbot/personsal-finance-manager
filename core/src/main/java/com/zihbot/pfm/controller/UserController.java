@@ -2,7 +2,7 @@ package com.zihbot.pfm.controller;
 
 import com.zihbot.pfm.security.JwtService;
 import com.zihbot.pfm.security.UserAuthService;
-import com.zihbot.pfm.service.AuthorizationService;
+import com.zihbot.pfm.service.UserService;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,7 +22,7 @@ public class UserController {
 
 	private final JwtService jwtService;
 	private final UserAuthService userAuthService;
-	private final AuthorizationService authoritationService;
+	private final UserService authoritationService;
 
 	@PostMapping("")
 	public void createUser(@RequestBody CreateUserRequest account) {

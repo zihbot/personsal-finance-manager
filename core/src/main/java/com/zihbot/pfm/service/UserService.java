@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorizationService {
+public class UserService {
 	@Value("${pfm.auth.root:root}") private String rootUsername;
 
 	public String username() {

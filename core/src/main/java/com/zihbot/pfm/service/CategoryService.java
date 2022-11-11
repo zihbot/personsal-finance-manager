@@ -12,14 +12,16 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
+    private final UserService user;
     private final CategoryRepository categoryRepository;
 
     public List<Category> listCategories() {
-        return categoryRepository.findAll();
+        return categoryRepository.findAllByUser(user.username());
     }
 
     public Category insertCategory(Category category) {
         category.setId(null);
+        category.setUser(user.username());
         return categoryRepository.save(category);
     }
 }

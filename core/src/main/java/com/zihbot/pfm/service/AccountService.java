@@ -12,15 +12,16 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
-    private final AuthorizationService authService;
+    private final UserService user;
     private final AccountRepository accountRepository;
 
 	public List<Account> listAccounts() {
-        return accountRepository.findAllByUser(authService.username());
+        return accountRepository.findAllByUser(user.username());
     }
 
     public Account insertAccount(Account account) {
         account.setId(null);
+        account.setUser(user.username());
         if (account.getBalance() == null) {
             account.setBalance(0L);
         }
