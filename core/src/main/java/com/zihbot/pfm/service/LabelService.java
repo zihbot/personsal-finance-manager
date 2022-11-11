@@ -12,15 +12,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LabelService {
+    private final UserService user;
     private final LabelRepository labelRepository;
 
 	public List<Label> listLabels() {
-        List<Label> labels = labelRepository.findAll();
-        return labels;
+        return labelRepository.findAllByUser(user.username());
     }
 
     public Label createOrGetLabel(String name) {
-        Label nameLabel = labelRepository.getByName(name);
+        Label nameLabel = labelRepository.getByUserAndName(user.username(), name);
         if (nameLabel != null) {
             return nameLabel;
         }
@@ -35,5 +35,9 @@ public class LabelService {
             throw new NullPointerException("No name for label");
         }
         return labelRepository.save(label);
+    }
+
+	public void deleteByUser(String user) {
+        labelRepository.deleteAllByUser(user);
     }
 }

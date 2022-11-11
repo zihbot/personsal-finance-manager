@@ -18,14 +18,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
+    private final UserService user;
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
 
     private final LabelService labelService;
 
 	public List<Transaction> listTransactions() {
-        List<Transaction> transactions = transactionRepository.findAll();
-        return transactions;
+        return transactionRepository.findAllByUser(user.username());
     }
 
     public Transaction insertTransaction(Transaction transaction, Long sourceId, Long targetId) {
@@ -75,5 +75,9 @@ public class TransactionService {
         }
 
         return transactionRepository.save(transaction);
+    }
+
+	public void deleteByUser(String user) {
+        transactionRepository.deleteAllByUser(user);
     }
 }

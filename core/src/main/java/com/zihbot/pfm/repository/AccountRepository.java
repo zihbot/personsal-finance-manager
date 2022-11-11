@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    public List<Account> findAllByUser(String user);
+    List<Account> findAllByUser(String user);
+    void deleteAllByUser(String user);
 }

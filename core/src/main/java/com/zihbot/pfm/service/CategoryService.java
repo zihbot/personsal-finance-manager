@@ -24,4 +24,8 @@ public class CategoryService {
         category.setUser(user.username());
         return categoryRepository.save(category);
     }
+
+	public void deleteByUser(String user) {
+        categoryRepository.deleteAllByUser(user);
+    }
 }
