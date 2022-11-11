@@ -33,7 +33,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/{username}")
-	public void createUser(@PathVariable String username) {
+	public void deleteUser(@PathVariable String username) {
 		if (!authoritationService.isRoot()) {
 			throw new AccessDeniedException("Forbidden");
 		}

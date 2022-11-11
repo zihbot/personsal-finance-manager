@@ -23,8 +23,8 @@ public class PfmUserService {
     }
 
 	public void deleteUser(String username) {
-        labelService.deleteByUser(username);
         transactionService.deleteByUser(username);
+        labelService.deleteByUser(username);
         accountService.deleteByUser(username);
         categoryService.deleteByUser(username);
         pfmUserRepository.deleteByUsername(username);

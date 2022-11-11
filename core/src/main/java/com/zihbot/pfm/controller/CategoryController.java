@@ -25,7 +25,7 @@ public class CategoryController {
 	public List<CategoryDto> listCategories() {
 		List<Category> categories = categoryService.listCategories();
         return categories.stream()
-            .map(m -> new CategoryDto(m))
+            .map(CategoryDto::new)
             .collect(Collectors.toList());
 	}
 

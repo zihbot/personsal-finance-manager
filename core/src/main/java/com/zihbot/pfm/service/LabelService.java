@@ -1,10 +1,13 @@
 package com.zihbot.pfm.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.repository.LabelRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LabelService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final UserService user;
     private final LabelRepository labelRepository;
 
@@ -38,6 +43,15 @@ public class LabelService {
     }
 
 	public void deleteByUser(String user) {
+        logger.info("Delete labels for user {}", user);
+        // Unlink ManyToMany first
+        List<Label> labels = labelRepository.findAllByUser(user);
+        labels.stream().forEach(l -> {
+            l.setTransactions(Set.of());
+            l.setConnections(Set.of());
+        });
+        labelRepository.saveAll(labels);
+
         labelRepository.deleteAllByUser(user);
     }
 }

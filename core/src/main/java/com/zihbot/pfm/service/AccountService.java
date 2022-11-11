@@ -5,6 +5,8 @@ import java.util.List;
 import com.zihbot.pfm.dao.Account;
 import com.zihbot.pfm.repository.AccountRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final UserService user;
     private final AccountRepository accountRepository;
 
@@ -29,6 +33,7 @@ public class AccountService {
     }
 
 	public void deleteByUser(String user) {
+        logger.info("Delete accounts for user {}", user);
         accountRepository.deleteAllByUser(user);
     }
 }

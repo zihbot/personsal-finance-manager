@@ -11,6 +11,8 @@ import com.zihbot.pfm.dao.Transaction;
 import com.zihbot.pfm.repository.AccountRepository;
 import com.zihbot.pfm.repository.TransactionRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final UserService user;
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
@@ -78,6 +82,12 @@ public class TransactionService {
     }
 
 	public void deleteByUser(String user) {
+        logger.info("Delete transactions for user {}", user);
+        // Unlink ManyToMany first
+        List<Transaction> transactions = transactionRepository.findAllByUser(user);
+        transactions.stream().forEach(t -> t.setLabels(Set.of()));
+        transactionRepository.saveAll(transactions);
+
         transactionRepository.deleteAllByUser(user);
     }
 }
