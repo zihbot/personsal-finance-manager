@@ -82,10 +82,6 @@ public class TransactionService {
 
 	public void deleteByUser(String user) {
         logger.info("Delete transactions for user {}", user);
-        // Unlink ManyToMany first
-        List<Transaction> transactions = transactionRepository.findAllByUser(user);
-        transactions.stream().forEach(t -> t.setLabels(new HashSet<>()));
-        transactionRepository.saveAll(transactions);
 
         transactionRepository.deleteAllByUser(user);
     }

@@ -1,6 +1,5 @@
 package com.zihbot.pfm.service;
 
-import java.util.HashSet;
 import java.util.List;
 
 import com.zihbot.pfm.dao.Label;
@@ -44,13 +43,6 @@ public class LabelService {
 
 	public void deleteByUser(String user) {
         logger.info("Delete labels for user {}", user);
-        // Unlink ManyToMany first
-        List<Label> labels = labelRepository.findAllByUser(user);
-        labels.stream().forEach(l -> {
-            l.setTransactions(new HashSet<>());
-            l.setConnections(new HashSet<>());
-        });
-        labelRepository.saveAll(labels);
 
         labelRepository.deleteAllByUser(user);
     }
