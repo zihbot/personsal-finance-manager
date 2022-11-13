@@ -1,7 +1,7 @@
 package com.zihbot.pfm.service;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.zihbot.pfm.dao.Label;
 import com.zihbot.pfm.repository.LabelRepository;
@@ -47,8 +47,8 @@ public class LabelService {
         // Unlink ManyToMany first
         List<Label> labels = labelRepository.findAllByUser(user);
         labels.stream().forEach(l -> {
-            l.setTransactions(Set.of());
-            l.setConnections(Set.of());
+            l.setTransactions(new HashSet<>());
+            l.setConnections(new HashSet<>());
         });
         labelRepository.saveAll(labels);
 

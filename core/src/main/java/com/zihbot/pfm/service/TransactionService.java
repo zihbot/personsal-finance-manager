@@ -38,6 +38,7 @@ public class TransactionService {
         }
 
         transaction.setId(null);
+        transaction.setUser(user.username());
 
         if (sourceId != null) {
             Account source = accountRepository.getById(sourceId);
@@ -71,10 +72,8 @@ public class TransactionService {
         }
 
         if (labels != null) {
-            Set<Label> newLabels = new HashSet<Label>();
-            labels.forEach(label -> {
-                newLabels.add(labelService.createOrGetLabel(label));
-            });
+            Set<Label> newLabels = new HashSet<>();
+            labels.forEach(label -> newLabels.add(labelService.createOrGetLabel(label)));
             transaction.setLabels(newLabels);
         }
 
@@ -85,7 +84,7 @@ public class TransactionService {
         logger.info("Delete transactions for user {}", user);
         // Unlink ManyToMany first
         List<Transaction> transactions = transactionRepository.findAllByUser(user);
-        transactions.stream().forEach(t -> t.setLabels(Set.of()));
+        transactions.stream().forEach(t -> t.setLabels(new HashSet<>()));
         transactionRepository.saveAll(transactions);
 
         transactionRepository.deleteAllByUser(user);

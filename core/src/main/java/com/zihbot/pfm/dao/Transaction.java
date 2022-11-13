@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -22,5 +24,11 @@ public class Transaction {
     private @ManyToOne Category category;
     private Long time;
     private @ManyToOne Label name;
-    private @ManyToMany Set<Label> labels;
+    private
+    @ManyToMany
+    @JoinTable(
+      name = "transaction_labels",
+      joinColumns = @JoinColumn(name = "transaction_id"),
+      inverseJoinColumns = @JoinColumn(name = "label_id"))
+    Set<Label> labels;
 }
