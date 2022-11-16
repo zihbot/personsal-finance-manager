@@ -1,19 +1,26 @@
 <template>
     <div class="center login-container">
         <input name="username" v-model="username" />
-        <input name="password" v-model="password" />
+        <input name="password" type="password" v-model="password" />
         <button @click="login">Login</button>
     </div>
 </template>
 
 <script lang="ts" setup>
+import router from '@/router';
 import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 const username = ref('');
 const password = ref('');
+const store = useStore();
 
-function login() {
-    console.log('LOF')
+async function login() {
+    await store.dispatch('login', {
+        username: username.value,
+        password: password.value
+    });
+    router.push({path: '/about'});
 }
 </script>
 

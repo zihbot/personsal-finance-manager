@@ -1,4 +1,7 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import PocketBase from 'pocketbase';
+
+const client = new PocketBase('/');
 
 export default createStore({
   state: {
@@ -8,6 +11,9 @@ export default createStore({
   mutations: {
   },
   actions: {
+    login({commit}, payload: any) {
+      return client.users.authViaEmail(payload.username, payload.password);
+    }
   },
   modules: {
   }
