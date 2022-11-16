@@ -1,12 +1,14 @@
 <template>
     <div class="center login-container">
-        <input name="username" v-model="username" />
-        <input name="password" type="password" v-model="password" />
-        <button @click="login">Login</button>
+        <app-input name="username" v-model="username" />
+        <app-input name="password" type="password" v-model="password" />
+        <app-button @click="login" class="primary">Login</app-button>
     </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+import AppButton from '@/components/AppButton.vue';
+import AppInput from '@/components/AppInput.vue';
 import router from '@/router';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
@@ -38,6 +40,8 @@ async function login() {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
     justify-content: center;
 }
 </style>

@@ -1,0 +1,11 @@
+:root {
+    --app-text-color: #212121;
+    --app-text-inverse-color: #fefffe;
+
+    --app-primary-color: #31934e;
+}
+
+body {
+    margin: 0;
+    color: var(--app-text-color);
+}
