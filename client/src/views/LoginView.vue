@@ -22,7 +22,7 @@ async function login() {
         username: username.value,
         password: password.value
     });
-    router.push({path: '/about'});
+    router.push({path: '/transactions'});
 }
 </script>
 
