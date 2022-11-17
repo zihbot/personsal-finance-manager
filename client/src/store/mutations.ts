@@ -1,0 +1,1 @@
+export const MUT_TRANSACTIONS_SET = 'transactionsSet';
