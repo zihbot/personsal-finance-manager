@@ -1,0 +1,31 @@
+<template>
+    <div v-if="category" class="category" :style="{ backgroundColor: category.color }">
+        <i class="fa-solid" :class="category.icon"></i>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const props = defineProps(['categoryId']);
+const store = useStore();
+
+const category = computed(() => store.state.categories.find(c => c.id === props.categoryId) ?? {
+    color: '#333333',
+    icon: 'fa-question',
+});
+</script>
+
+<style scoped lang="scss">
+.category {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+
+    .fa-solid {
+        color: var(--app-light-background);
+        translate: 0 50%;
+    }
+}
+</style>
