@@ -1,11 +1,11 @@
 <template>
-    <input v-model="value"/>
+    <input :class="valid+'-input'" v-model="value" />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
-const props = defineProps(['modelValue']);
+const props = defineProps(['modelValue', 'valid']);
 const emit = defineEmits(['update:modelValue']);
 
 const value = computed({
@@ -14,8 +14,8 @@ const value = computed({
     },
     set(value) {
         emit('update:modelValue', value);
-    }
-})
+    },
+});
 </script>
 
 <style scoped lang="scss">
@@ -29,5 +29,8 @@ input {
 
     padding: 1rem;
     font-size: 1.2em;
+}
+.number-input {
+    text-align: right;
 }
 </style>

@@ -6,6 +6,10 @@
         <router-view />
     </div>
     <app-floating-action-button
+        v-if="
+            router.currentRoute.value?.fullPath !== '/transaction-edit' &&
+            router.currentRoute.value?.fullPath !== '/'
+        "
         class="fab-page"
         :icon="'fa-plus'"
         @click="router.push('transaction-edit')"
