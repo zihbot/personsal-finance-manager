@@ -1,13 +1,19 @@
 <template>
     <nav v-if="router.currentRoute.value?.fullPath !== '/'">
-        <router-link to="/">Login</router-link>
+        <router-link to="/transactions">Transactions</router-link>
     </nav>
     <div id="main-container">
         <router-view />
     </div>
+    <app-floating-action-button
+        class="fab-page"
+        :icon="'fa-plus'"
+        @click="router.push('transaction-edit')"
+    ></app-floating-action-button>
 </template>
 
 <script setup lang="ts">
+import AppFloatingActionButton from "./components/AppFloatingActionButton.vue";
 import router from "./router";
 </script>
 

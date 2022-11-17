@@ -1,7 +1,7 @@
 <template>
     <div class="transaction">
         <transaction-category :category-id="props.transaction.category"></transaction-category>
-        {{props.transaction.value}}
+        <span class="transaction-value">{{props.transaction.value}}</span>
     </div>
 </template>
 
@@ -22,5 +22,9 @@ const props = defineProps(['transaction']);
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    .transaction-value {
+        margin: 0 2rem 0 auto;
+    }
 }
 </style>

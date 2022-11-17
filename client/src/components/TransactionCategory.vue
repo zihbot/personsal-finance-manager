@@ -24,7 +24,7 @@ const category = computed(() => store.state.categories.find(c => c.id === props.
     border-radius: 50%;
 
     .fa-solid {
-        color: var(--app-light-background);
+        color: var(--app-light-text-color);
         translate: 0 50%;
     }
 }
