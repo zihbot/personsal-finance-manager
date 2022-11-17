@@ -3,6 +3,7 @@
         v-for="transaction in transactions"
         :key="transaction.id"
         :transaction="transaction"
+        class="item"
     ></transaction-list-item>
 </template>
 
@@ -21,4 +22,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.item {
+    margin: .5rem 0;
+}
+</style>

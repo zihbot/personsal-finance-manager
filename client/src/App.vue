@@ -1,6 +1,7 @@
 <template>
     <nav v-if="router.currentRoute.value?.fullPath !== '/'">
         <router-link to="/transactions">Transactions</router-link>
+        <router-link to="/">Logout</router-link>
     </nav>
     <div id="main-container">
         <router-view />
@@ -35,6 +36,7 @@ import router from "./router";
 nav {
     padding: 30px;
     a {
+        padding: 1rem;
         font-weight: bold;
         color: #2c3e50;
         &.router-link-exact-active {
