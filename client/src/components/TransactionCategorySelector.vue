@@ -1,5 +1,5 @@
 <template>
-    <div class="category-list" v-if="modelValue">
+    <div class="category-list single" v-if="modelValue">
         <transaction-category
             class="action"
             :category-id="modelValue"
@@ -36,5 +36,8 @@ const categories = computed(() => store.state.categories);
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     font-size: 2em;
+    &.single {
+        grid-template-columns: 1fr;
+    }
 }
 </style>

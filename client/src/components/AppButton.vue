@@ -4,11 +4,6 @@
     </div>
 </template>
 
-<script setup lang="ts">
-const props = defineProps(['']);
-const emit = defineEmits(['update:click']);
-</script>
-
 <style scoped lang="scss">
 .btn {
     padding: 1rem;
