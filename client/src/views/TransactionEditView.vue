@@ -25,7 +25,7 @@ import AppButton from '@/components/AppButton.vue';
 import AppInput from '@/components/AppInput.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
 import router from '@/router';
-import { ACT_TRANSACTIONS_CREATE } from '@/store/actions';
+import { ACT_TRANSACTIONS_CREATE, ACT_TRANSACTIONS_EDIT } from '@/store/actions';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
@@ -41,7 +41,8 @@ const value = ref(transaction ? transaction.value : null);
 
 function save() {
     store
-        .dispatch(ACT_TRANSACTIONS_CREATE, {
+        .dispatch(transaction ? ACT_TRANSACTIONS_EDIT : ACT_TRANSACTIONS_CREATE, {
+            id: transaction?.id ?? null,
             category: categoryId.value,
             value: Number(value.value),
         })

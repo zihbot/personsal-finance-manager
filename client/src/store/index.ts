@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import PocketBase, { Record, User } from 'pocketbase';
-import { ACT_CATEGORIES_LIST, ACT_LOGIN, ACT_TRANSACTIONS_CREATE, ACT_TRANSACTIONS_LIST } from './actions';
+import { ACT_CATEGORIES_LIST, ACT_LOGIN, ACT_TRANSACTIONS_CREATE, ACT_TRANSACTIONS_DELETE, ACT_TRANSACTIONS_EDIT, ACT_TRANSACTIONS_LIST } from './actions';
 import { MUT_CATEGORIES_SET, MUT_TRANSACTIONS_SET, MUT_USER_SET } from './mutations';
 
 const client = new PocketBase('/');
@@ -41,6 +41,12 @@ export default createStore({
     },
     [ACT_TRANSACTIONS_CREATE]({commit, state}, payload: any) {
       return client.records.create(COLLECTION_TRANSACTIONS, {user: state.user?.id, ...payload});
+    },
+    [ACT_TRANSACTIONS_EDIT]({commit, state}, payload: any) {
+      return client.records.update(COLLECTION_TRANSACTIONS, payload.id, {user: state.user?.id, ...payload});
+    },
+    [ACT_TRANSACTIONS_DELETE]({commit, state}, payload: any) {
+      return client.records.delete(COLLECTION_TRANSACTIONS, payload.id);
     },
     [ACT_CATEGORIES_LIST]({commit}, payload: any) {
       return client.records.getFullList(COLLECTION_CATEGORIES, undefined, {})
