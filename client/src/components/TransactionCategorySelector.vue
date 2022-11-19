@@ -1,14 +1,14 @@
 <template>
     <div class="category-list single" v-if="modelValue">
         <transaction-category
-            class="action"
+            class="action selected"
             :category-id="modelValue"
             @click="emit('update:modelValue', null)"
         ></transaction-category>
     </div>
     <div class="category-list" v-if="!modelValue">
         <transaction-category
-            class="action"
+            class="action selectable"
             v-for="category in categories"
             :category-id="category.id"
             :key="category.id"
@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
-import { useStore } from "vuex";
-import TransactionCategory from "./TransactionCategory.vue";
+import { computed } from '@vue/reactivity';
+import { useStore } from 'vuex';
+import TransactionCategory from './TransactionCategory.vue';
 
 const props = defineProps(['modelValue', 'valid']);
 const emit = defineEmits(['update:modelValue']);
@@ -31,13 +31,19 @@ const categories = computed(() => store.state.categories);
 
 <style scoped lang="scss">
 .category-list {
-    display: grid;
-    gap: 1rem;
+    display: flex;
+    gap: 2rem;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     font-size: 2em;
+    .selectable {
+        border: 1px solid transparent;
+    }
     &.single {
         grid-template-columns: 1fr;
+        .selected {
+            border: 1px solid var(--app-text-color);
+        }
     }
 }
 </style>

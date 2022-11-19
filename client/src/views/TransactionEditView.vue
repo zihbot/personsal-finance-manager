@@ -11,7 +11,7 @@
         <transaction-category-selector
             v-model="categoryId"
         ></transaction-category-selector>
-        <app-button class="primary" @click="save()">Save</app-button>
+        <app-button class="primary" v-bind:disabled="!value || !categoryId" @click="save()">Save</app-button>
     </div>
 </template>
 
