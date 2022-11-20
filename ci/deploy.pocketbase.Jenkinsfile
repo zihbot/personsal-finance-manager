@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy') {
+        stage('Stop containers') {
             steps {
                 dir('ci/pocketbase') {
                     sh "docker-compose down"
@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Start containers') {
             steps {
                 dir('ci/pocketbase') {
                     sh "docker-compose up -d"
