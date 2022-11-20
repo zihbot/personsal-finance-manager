@@ -24,6 +24,17 @@ pipeline {
                 build job: 'pfm-build-webapp'
             }
         }
+        stage('Start client build') {
+            when {
+                anyOf {
+                    changeset "client/**"
+                    changeset "ci/build.client.Jenkinsfile"
+                }
+            }
+            steps {
+                build job: 'pfm-build-client'
+            }
+        }
         stage('Start deploy') {
             steps {
                 build job: 'pfm-deploy-dev'
