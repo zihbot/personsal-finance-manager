@@ -38,6 +38,7 @@ pipeline {
         stage('Start deploy') {
             steps {
                 build job: 'pfm-deploy-dev'
+                build job: 'pfm-deploy-pocketbase'
             }
         }
     }
