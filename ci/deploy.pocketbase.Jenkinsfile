@@ -19,7 +19,7 @@ pipeline {
                     filter: '**/dist.zip',
                     flatten: true,
                     target: 'ci/client']);
-                dir('ci/webapp') {
+                dir('ci/client') {
                     sh "unzip -o dist.zip"
                     sh "cp -r ./dist/ /usr/share/personal-finance-manager/pb_public/"
                 }
