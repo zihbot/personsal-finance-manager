@@ -1,12 +1,11 @@
-FROM alpine:3.16.3
+FROM golang:1.19-alpine3.16
 
-RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.7.10/pocketbase_0.7.10_linux_amd64.zip -O pocketbase.zip
-RUN unzip pocketbase.zip
-RUN rm pocketbase.zip
+WORKDIR /app
 
-RUN mkdir /pb_data
-VOLUME /pb_data
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
-EXPOSE 8090
+COPY . .
+RUN go build -v -o /out
 
-ENTRYPOINT ["./pocketbase", "serve"]
+ENTRYPOINT ["../out/pocketbase", "serve"]
