@@ -1,4 +1,4 @@
-FROM buster
+FROM debian:buster
 
 WORKDIR /
 
