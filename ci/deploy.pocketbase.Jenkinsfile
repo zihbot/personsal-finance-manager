@@ -19,7 +19,7 @@ pipeline {
                     flatten: true,
                     target: 'ci/pocketbase']);
                 step ([$class: 'CopyArtifact',
-                    projectName: 'pfm-build-client',
+                    projectName: 'pfm-build-pbcore',
                     filter: '**/pbcore.zip',
                     flatten: true,
                     target: 'ci/pocketbase']);
@@ -28,7 +28,7 @@ pipeline {
                     sh "unzip -o pbcore.zip"
                     sh "cp out/* ./"
                     sh "mkdir -p pb_public"
-                    sh "cp dist/* ./pb_public/"
+                    sh "cp -r dist/* ./pb_public/"
                 }
             }
         }
