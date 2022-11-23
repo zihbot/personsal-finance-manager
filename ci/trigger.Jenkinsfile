@@ -13,6 +13,17 @@ pipeline {
                 build job: 'pfm-build-core'
             }
         }
+        stage('Start pocketbase build') {
+            when {
+                anyOf {
+                    changeset "pocketbase/**"
+                    changeset "ci/build.pbcore.Jenkinsfile"
+                }
+            }
+            steps {
+                build job: 'pfm-build-pbcore'
+            }
+        }
         stage('Start webapp build') {
             when {
                 anyOf {
