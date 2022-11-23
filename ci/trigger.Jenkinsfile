@@ -10,7 +10,8 @@ pipeline {
                 }
             }
             steps {
-                build job: 'pfm-build-core'
+                sh "echo disabled core build"
+                //build job: 'pfm-build-core'
             }
         }
         stage('Start pocketbase build') {
@@ -32,7 +33,8 @@ pipeline {
                 }
             }
             steps {
-                build job: 'pfm-build-webapp'
+                sh "echo disabled webapp build"
+                //build job: 'pfm-build-webapp'
             }
         }
         stage('Start client build') {
