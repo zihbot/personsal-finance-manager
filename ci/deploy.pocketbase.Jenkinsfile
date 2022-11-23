@@ -13,15 +13,22 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/zihbot/personsal-finance-manager.git'
-                sh "rm -f -R /usr/share/personal-finance-manager/pb_public"
                 step ([$class: 'CopyArtifact',
                     projectName: 'pfm-build-client',
                     filter: '**/dist.zip',
                     flatten: true,
-                    target: 'ci/client']);
-                dir('ci/client') {
+                    target: 'ci/pocketbase']);
+                step ([$class: 'CopyArtifact',
+                    projectName: 'pfm-build-client',
+                    filter: '**/pbcore.zip',
+                    flatten: true,
+                    target: 'ci/pocketbase']);
+                dir('ci/pocketbase') {
                     sh "unzip -o dist.zip"
-                    sh "cp -r ./dist/ /usr/share/personal-finance-manager/pb_public/"
+                    sh "unzip -o pbcore.zip"
+                    sh "cp out/* ./"
+                    sh "mkdir -p pb_public"
+                    sh "cp dist/* ./pb_public/"
                 }
             }
         }
