@@ -1,4 +1,4 @@
-module zihbot.eu/m/v2
+module zihbot.eu/pfm/main
 
 go 1.19
 
