@@ -9,10 +9,10 @@ pipeline {
         }
         stage('Build poscketbase core') {
             steps {
-                sh "cp -p ${WORKSPACE}/ci/pocketbase/Dockerfile ${WORKSPACE}/pocketbase/"
+                sh "mkdir -p ${WORKSPACE}/../pfm-pbcore-cache"
+                sh "mkdir -p ${WORKSPACE}/pocketbase/out"
+                sh "docker run --rm -v ${WORKSPACE}/pocketbase:/usr/src/myapp -v ${WORKSPACE}/../pfm-pbcore-cache:/go/pkg/mod -w /usr/src/myapp golang:1.19-buster go build -v -o ./out/pfm-pocketbase"
                 dir('pocketbase') {
-                    sh "mkdir -p ${WORKSPACE}/pocketbase/out"
-                    sh "docker build . -v ${WORKSPACE}/pocketbase/out:/out"
                     sh "cp pb_schema.json out/"
                 }
             }
