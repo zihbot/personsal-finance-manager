@@ -35,7 +35,7 @@ pipeline {
         stage('Start containers') {
             steps {
                 dir('ci/pocketbase') {
-                    sh "docker-compose up -d"
+                    sh "docker-compose up --build -d"
                 }
             }
         }
