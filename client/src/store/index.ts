@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import PocketBase, { Record, User } from 'pocketbase';
+import PocketBase from 'pocketbase';
 import { ACT_CATEGORIES_LIST, ACT_LOGIN, ACT_TRANSACTIONS_CREATE, ACT_TRANSACTIONS_DELETE, ACT_TRANSACTIONS_EDIT, ACT_TRANSACTIONS_LIST } from './actions';
 import { MUT_CATEGORIES_SET, MUT_TRANSACTIONS_SET, MUT_USER_SET } from './mutations';
 
@@ -10,7 +10,7 @@ const COLLECTION_CATEGORIES = 'categories';
 
 export default createStore({
   state: {
-    user: null as User | null,
+    userId: null,
     transactions: [],
     categories: [],
   },
@@ -18,7 +18,7 @@ export default createStore({
   },
   mutations: {
     [MUT_USER_SET](state, payload: any) {
-      state.user = payload;
+      state.userId = payload;
     },
     [MUT_TRANSACTIONS_SET](state, payload: any) {
       state.transactions = payload;
@@ -29,27 +29,27 @@ export default createStore({
   },
   actions: {
     [ACT_LOGIN]({commit, dispatch}, payload: any) {
-      return client.users.authViaEmail(payload.username, payload.password)
+      return client.collection('users').authWithPassword(payload.username, payload.password)
       .then((data) => {
-        commit(MUT_USER_SET, data.user);
+        commit(MUT_USER_SET, data.record.id);
         dispatch(ACT_CATEGORIES_LIST);
       });
     },
     [ACT_TRANSACTIONS_LIST]({commit}, payload: any) {
-      return client.records.getFullList(COLLECTION_TRANSACTIONS, undefined, {})
+      return client.collection(COLLECTION_TRANSACTIONS).getFullList(undefined, {})
         .then((data) => commit(MUT_TRANSACTIONS_SET, data));
     },
     [ACT_TRANSACTIONS_CREATE]({commit, state}, payload: any) {
-      return client.records.create(COLLECTION_TRANSACTIONS, {user: state.user?.id, ...payload});
+      return client.collection(COLLECTION_TRANSACTIONS).create({user: state.userId, ...payload});
     },
     [ACT_TRANSACTIONS_EDIT]({commit, state}, payload: any) {
-      return client.records.update(COLLECTION_TRANSACTIONS, payload.id, {user: state.user?.id, ...payload});
+      return client.collection(COLLECTION_TRANSACTIONS).update(payload.id, {user: state.userId, ...payload});
     },
     [ACT_TRANSACTIONS_DELETE]({commit, state}, payload: any) {
-      return client.records.delete(COLLECTION_TRANSACTIONS, payload.id);
+      return client.collection(COLLECTION_TRANSACTIONS).delete(payload.id);
     },
     [ACT_CATEGORIES_LIST]({commit}, payload: any) {
-      return client.records.getFullList(COLLECTION_CATEGORIES, undefined, {})
+      return client.collection(COLLECTION_CATEGORIES).getFullList(undefined, {})
         .then((data) => commit(MUT_CATEGORIES_SET, data));
     },
   },

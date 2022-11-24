@@ -4,7 +4,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://zihbot.eu:35690',
+        target: 'http://zihbot.eu:35695',
         changeOrigin: true
       }
     }
