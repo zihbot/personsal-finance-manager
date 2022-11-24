@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh "mkdir -p ${WORKSPACE}/../pfm-pbcore-cache"
                 sh "mkdir -p ${WORKSPACE}/pocketbase/out"
-                sh "docker run --rm -v ${WORKSPACE}/pocketbase:/usr/src/myapp -v ${WORKSPACE}/../pfm-pbcore-cache:/go/pkg/mod -w /usr/src/myapp golang:1.19-buster go build -v -o ./out/pfm-pocketbase"
+                sh "docker run --rm -v ${WORKSPACE}/pocketbase:/usr/src/myapp -v ${WORKSPACE}/../pfm-pbcore-cache/go.pck.mod:/go/pkg/mod -v ${WORKSPACE}/../pfm-pbcore-cache/root.cache.go-build:/root/.cache/go-build -w /usr/src/myapp golang:1.19-buster go build -v -o ./out/pfm-pocketbase"
                 dir('pocketbase') {
                     sh "cp pb_schema.json out/"
                 }
