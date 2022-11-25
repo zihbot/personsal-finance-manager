@@ -7,6 +7,7 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
+	"zihbot.eu/pfm/main/cmd"
 )
 
 func main() {
@@ -16,6 +17,8 @@ func main() {
 		e.Router.GET("/*", apis.StaticDirectoryHandler(os.DirFS("./pb_public"), true))
 		return nil
 	})
+
+	app.RootCmd.AddCommand(cmd.NewSchemaCommand(app))
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
