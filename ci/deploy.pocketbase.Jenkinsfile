@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Migrate schema') {
             steps {
-                sh "docker exec pocketbase_pocketbase_1 pfm-pocketbase schema"
+                sh "docker exec pocketbase_pocketbase_1 ./pfm-pocketbase schema"
             }
         }
     }
