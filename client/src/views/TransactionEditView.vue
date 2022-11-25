@@ -1,5 +1,11 @@
 <template>
-    <app-action-menu> </app-action-menu>
+    <app-action-menu>
+        <app-action-menu-item
+            class="danger"
+            :icon="'fa-trash'"
+            @click="remove()"
+        ></app-action-menu-item>
+    </app-action-menu>
     <div class="form-container">
         <div class="input-postfix">
             <app-input
@@ -23,12 +29,14 @@
 
 <script setup lang="ts">
 import AppActionMenu from '@/components/AppActionMenu.vue';
+import AppActionMenuItem from '@/components/AppActionMenuItem.vue';
 import AppButton from '@/components/AppButton.vue';
 import AppInput from '@/components/AppInput.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
 import router from '@/router';
 import {
     ACT_TRANSACTIONS_CREATE,
+    ACT_TRANSACTIONS_DELETE,
     ACT_TRANSACTIONS_EDIT,
 } from '@/store/actions';
 import { computed, ref } from 'vue';
@@ -54,6 +62,17 @@ function save() {
                 value: Number(value.value),
             }
         )
+        .then(() => router.push('/transactions'));
+}
+function remove() {
+    if (!transaction) {
+        router.push('/transactions');
+        return;
+    }
+    store
+        .dispatch(ACT_TRANSACTIONS_DELETE, {
+            id: transaction?.id,
+        })
         .then(() => router.push('/transactions'));
 }
 </script>

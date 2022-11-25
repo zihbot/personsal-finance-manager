@@ -8,7 +8,7 @@
     </div>
     <app-floating-action-button
         v-if="
-            router.currentRoute.value?.fullPath !== '/transaction-edit' &&
+            !router.currentRoute.value?.fullPath?.startsWith?.('/transaction-edit') &&
             router.currentRoute.value?.fullPath !== '/'
         "
         class="fab-page"
@@ -18,12 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import AppFloatingActionButton from "./components/AppFloatingActionButton.vue";
-import router from "./router";
+import AppFloatingActionButton from './components/AppFloatingActionButton.vue';
+import router from './router';
 </script>
 
 <style lang="scss">
-@import "styles.scss";
+@import 'styles.scss';
 
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

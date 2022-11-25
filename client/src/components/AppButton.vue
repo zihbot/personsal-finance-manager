@@ -55,19 +55,24 @@ function handleClick(event: Event) {
 }
 .icon .btn {
     font-size: 1em;
-    border: 1px solid var(--app-primary-color);
-    background-color: var(--app-primary-color);
     padding: 0;
-    color: var(--app-text-inverse-color);
+    border: 1px solid var(--app-lighter-background);
+    background-color: var(--app-lighter-background);
+    color: var(--app-primary-color);
     font-size: 1.2em;
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    &.danger {
-        border: 1px solid var(--app-danger-color);
-        background-color: var(--app-danger-color);
+    .primary & {
+        border: 1px solid var(--app-primary-color);
+        background-color: var(--app-primary-color);
+        color: var(--app-text-inverse-color);
+    }
+    &:hover {
+        border: 1px solid var(--app-light-background);
+        background-color: var(--app-light-background);
     }
 }
 </style>

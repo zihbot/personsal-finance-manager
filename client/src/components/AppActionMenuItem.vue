@@ -12,8 +12,10 @@ const props = defineProps(["icon"]);
 
 <style scoped lang="scss">
 .icon-button {
-    width: 2em;
-    height: 2em;
-    --app-primary-color: var(--app-danger-color)
+    width: 2.5em;
+    height: 2.5em;
+}
+.danger {
+    --app-primary-color: var(--app-danger-color);
 }
 </style>
