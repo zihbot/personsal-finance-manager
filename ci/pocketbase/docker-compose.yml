@@ -1,5 +1,6 @@
 pocketbase:
   build: .
+  container_name: pocketbase_pocketbase_1
   ports:
     - "35695:8090"
   volumes:
