@@ -32,12 +32,14 @@ const categories = computed(() => store.state.categories);
 <style scoped lang="scss">
 .category-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     font-size: 2em;
     .selectable {
         border: 1px solid transparent;
+        flex-shrink: 0;
     }
     &.single {
         grid-template-columns: 1fr;
