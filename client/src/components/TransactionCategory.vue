@@ -8,10 +8,10 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
-const props = defineProps(['categoryId']);
+const props = defineProps(['categoryId', 'categoryData']);
 const store = useStore();
 
-const category = computed(() => store.state.categories.find(c => c.id === props.categoryId) ?? {
+const category = props.categoryData ?? computed(() => store.state.categories.find(c => c.id === props.categoryId) ?? {
     color: '#333333',
     icon: 'fa-question',
 });

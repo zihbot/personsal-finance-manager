@@ -1,6 +1,7 @@
 <template>
     <nav v-if="router.currentRoute.value?.fullPath !== '/'">
         <router-link to="/transactions">Transactions</router-link>
+        <router-link to="/category-edit">Categories</router-link>
         <router-link to="/">Logout</router-link>
     </nav>
     <div id="main-container">

@@ -1,8 +1,15 @@
 <template>
     <div class="category-list single" v-if="modelValue">
         <transaction-category
+            v-if="modelValue !== newCategoryData.id"
             class="action selected"
             :category-id="modelValue"
+            @click="emit('update:modelValue', null)"
+        ></transaction-category>
+        <transaction-category
+            v-if="modelValue === newCategoryData.id"
+            class="action selected"
+            :category-data="newCategoryData"
             @click="emit('update:modelValue', null)"
         ></transaction-category>
     </div>
@@ -14,6 +21,12 @@
             :key="category.id"
             @click="emit('update:modelValue', category.id)"
         ></transaction-category>
+        <transaction-category
+            v-if="props.includeNew"
+            :category-data="newCategoryData"
+            @click="emit('update:modelValue', newCategoryData.id)"
+        >
+        </transaction-category>
     </div>
 </template>
 
@@ -22,7 +35,9 @@ import { computed } from '@vue/reactivity';
 import { useStore } from 'vuex';
 import TransactionCategory from './TransactionCategory.vue';
 
-const props = defineProps(['modelValue', 'valid']);
+const newCategoryData = { color: '#D0D0D0', icon: 'fa-plus', id: 'new'};
+
+const props = defineProps(['modelValue', 'valid', 'includeNew']);
 const emit = defineEmits(['update:modelValue']);
 const store = useStore();
 
