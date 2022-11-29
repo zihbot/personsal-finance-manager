@@ -24,17 +24,15 @@
             </div>
             Icon
             <div class="color-select">
-                <div
-                    class="color-item"
-                    v-for="(icon, i) in icons"
-                    :key="i"
-                ><i class="fa" :class="icon"></i></div>
+                <div class="color-item" v-for="(icon, i) in icons" :key="i">
+                    <i class="fa" :class="icon"></i>
+                </div>
             </div>
         </div>
         <app-button
             v-if="categoryId"
             class="primary"
-            :disabled="!icon"
+            :disabled="!icon || !color"
             @click="save()"
             >Save</app-button
         >
@@ -45,25 +43,34 @@
 import AppButton from '@/components/AppButton.vue';
 import TransactionCategory from '@/components/TransactionCategory.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
-import { computed, ref } from 'vue';
+import { computed, Ref, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
 
-const categoryId = ref(null);
-const category = computed(
-    () =>
-        store.state.categories.find((c) => c.id === categoryId.value) ?? {
-            color: '#EEEEEE',
-            icon: '',
-        }
-);
-const color = computed(() => category.value.color);
-const icon = computed(() => category.value.icon);
+const categoryId = ref(null) as Ref<null | string>;
+const color = ref('#EEEEEE');
+const icon = ref('');
+const category = computed(() => ({
+    id: null,
+    color: color.value,
+    icon: icon.value,
+}));
 
 const colors = ref(['#54426B', '#89B0EF', '#B0E298', '#3D3B8E']);
-const icons = ref(['fa-lightbulb', 'fa-train-subway', 'fa-utensils', 'fa-cart-shopping']);
-if (!colors.value.includes('')) colors.value.push('');
+const icons = ref([
+    'fa-lightbulb',
+    'fa-train-subway',
+    'fa-utensils',
+    'fa-cart-shopping',
+]);
+
+watch([categoryId], (catId) => {
+    const category = store.state.categories.find((c) => c.id === catId[0]);
+    if (!category) return;
+    color.value = category.color;
+    icon.value = category.icon;
+});
 
 function save() {
     // intentional
