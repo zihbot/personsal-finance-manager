@@ -9,8 +9,9 @@
     </div>
     <app-floating-action-button
         v-if="
-            !router.currentRoute.value?.fullPath?.startsWith?.('/transaction-edit') &&
-            router.currentRoute.value?.fullPath !== '/'
+            !router.currentRoute.value?.fullPath?.startsWith?.(
+                '/transaction-edit'
+            ) && router.currentRoute.value?.fullPath !== '/'
         "
         class="fab-page"
         :icon="'fa-plus'"
@@ -21,6 +22,12 @@
 <script setup lang="ts">
 import AppFloatingActionButton from './components/AppFloatingActionButton.vue';
 import router from './router';
+import store from './store';
+
+router.beforeEach((to, from) => {
+    if (store.state.userId === null && to.name !== 'login')
+        return { name: 'login' };
+});
 </script>
 
 <style lang="scss">
