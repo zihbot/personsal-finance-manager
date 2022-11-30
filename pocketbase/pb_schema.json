@@ -31,6 +31,21 @@
                 }
             },
             {
+                "id": "taqlmmfb",
+                "name": "currency",
+                "type": "select",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "values": [
+                        "HUF",
+                        "EUR"
+                    ]
+                }
+            },
+            {
                 "id": "lseh4uwx",
                 "name": "category",
                 "type": "relation",
@@ -41,6 +56,18 @@
                     "maxSelect": 1,
                     "collectionId": "0mlb5sh4r97mdt8",
                     "cascadeDelete": false
+                }
+            },
+            {
+                "id": "88fnhqxk",
+                "name": "time",
+                "type": "date",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "min": "",
+                    "max": ""
                 }
             }
         ],
