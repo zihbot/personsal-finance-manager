@@ -53,14 +53,10 @@ const categories = computed(() => store.state.categories);
     justify-items: center;
     font-size: 2em;
     .selectable {
-        border: 1px solid transparent;
         flex-shrink: 0;
     }
     &.single {
         grid-template-columns: 1fr;
-        .selected {
-            border: 1px solid var(--app-text-color);
-        }
     }
 }
 </style>

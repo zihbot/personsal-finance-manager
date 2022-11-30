@@ -1,6 +1,9 @@
 import { createStore } from 'vuex';
 import PocketBase from 'pocketbase';
 import {
+    ACT_CATEGORIES_CREATE,
+    ACT_CATEGORIES_DELETE,
+    ACT_CATEGORIES_EDIT,
     ACT_CATEGORIES_LIST,
     ACT_LOGIN,
     ACT_TRANSACTIONS_CREATE,
@@ -39,7 +42,7 @@ export default createStore({
         },
     },
     actions: {
-        [ACT_LOGIN]({ commit, dispatch }, payload: any) {
+        async [ACT_LOGIN]({ commit, dispatch }, payload: any) {
             return client
                 .collection(COLLECTION_USERS)
                 .authWithPassword(payload.username, payload.password)
@@ -48,32 +51,50 @@ export default createStore({
                     dispatch(ACT_CATEGORIES_LIST);
                 });
         },
-        [ACT_TRANSACTIONS_LIST]({ commit }, payload: any) {
+        async [ACT_TRANSACTIONS_LIST]({ commit }) {
             return client
                 .collection(COLLECTION_TRANSACTIONS)
-                .getFullList(undefined, { sort: '-created' })
+                .getFullList(undefined, { sort: '-time' })
                 .then((data) => commit(MUT_TRANSACTIONS_SET, data));
         },
-        [ACT_TRANSACTIONS_CREATE]({ commit, state }, payload: any) {
+        async [ACT_TRANSACTIONS_CREATE]({ state }, payload: any) {
             return client
                 .collection(COLLECTION_TRANSACTIONS)
                 .create({ user: state.userId, ...payload });
         },
-        [ACT_TRANSACTIONS_EDIT]({ commit, state }, payload: any) {
+        async [ACT_TRANSACTIONS_EDIT]({ state }, payload: any) {
             return client
                 .collection(COLLECTION_TRANSACTIONS)
                 .update(payload.id, { user: state.userId, ...payload });
         },
-        [ACT_TRANSACTIONS_DELETE]({ commit, state }, payload: any) {
+        async [ACT_TRANSACTIONS_DELETE](_, payload: any) {
             return client
                 .collection(COLLECTION_TRANSACTIONS)
                 .delete(payload.id);
         },
-        [ACT_CATEGORIES_LIST]({ commit }, payload: any) {
+        async [ACT_CATEGORIES_LIST]({ commit }) {
             return client
                 .collection(COLLECTION_CATEGORIES)
                 .getFullList(undefined, {})
                 .then((data) => commit(MUT_CATEGORIES_SET, data));
+        },
+        async [ACT_CATEGORIES_CREATE]({ dispatch, state }, payload: any) {
+            return client
+                .collection(COLLECTION_CATEGORIES)
+                .create({ user: state.userId, ...payload })
+                .then(() => dispatch(ACT_CATEGORIES_LIST));
+        },
+        async [ACT_CATEGORIES_EDIT]({ dispatch, state }, payload: any) {
+            return client
+                .collection(COLLECTION_CATEGORIES)
+                .update(payload.id, { user: state.userId, ...payload })
+                .then(() => dispatch(ACT_CATEGORIES_LIST));
+        },
+        async [ACT_CATEGORIES_DELETE]({ dispatch }, payload: any) {
+            return client
+                .collection(COLLECTION_CATEGORIES)
+                .delete(payload.id)
+                .then(() => dispatch(ACT_CATEGORIES_LIST));
         },
     },
     modules: {},

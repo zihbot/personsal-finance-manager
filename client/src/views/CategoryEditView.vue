@@ -6,26 +6,40 @@
             :include-new="true"
         >
         </transaction-category-selector>
-        <div class="edited" v-if="categoryId">
-            <transaction-category
-                @click="categoryId = null"
-                :category-data="category"
-            ></transaction-category>
-        </div>
         <div v-if="categoryId">
-            Color
-            <div class="color-select">
+            <app-action-menu>
+                <app-action-menu-item
+                    class="danger"
+                    :icon="'fa-trash'"
+                    @click="remove()"
+                ></app-action-menu-item>
+            </app-action-menu>
+            <div class="edited">
+                <transaction-category
+                    class="selectable"
+                    @click="categoryId = null"
+                    :category-data="category"
+                ></transaction-category>
+            </div>
+            <h2>Color</h2>
+            <div class="list-select">
                 <div
-                    class="color-item"
-                    v-for="(color, i) in colors"
+                    class="list-item"
+                    v-for="(colorItem, i) in colors"
                     :key="i"
-                    :style="{ backgroundColor: color }"
+                    :style="{ backgroundColor: colorItem }"
+                    @click="color = colorItem"
                 ></div>
             </div>
-            Icon
-            <div class="color-select">
-                <div class="color-item" v-for="(icon, i) in icons" :key="i">
-                    <i class="fa" :class="icon"></i>
+            <h2>Icon</h2>
+            <div class="list-select">
+                <div
+                    class="list-item"
+                    v-for="(iconItem, i) in icons"
+                    :key="i"
+                    @click="icon = iconItem"
+                >
+                    <i class="fa" :class="iconItem"></i>
                 </div>
             </div>
         </div>
@@ -40,9 +54,17 @@
 </template>
 
 <script setup lang="ts">
+import AppActionMenu from '@/components/AppActionMenu.vue';
+import AppActionMenuItem from '@/components/AppActionMenuItem.vue';
 import AppButton from '@/components/AppButton.vue';
 import TransactionCategory from '@/components/TransactionCategory.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
+import router from '@/router';
+import {
+    ACT_CATEGORIES_CREATE,
+    ACT_CATEGORIES_DELETE,
+    ACT_CATEGORIES_EDIT,
+} from '@/store/actions';
 import { computed, Ref, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
@@ -67,13 +89,35 @@ const icons = ref([
 
 watch([categoryId], (catId) => {
     const category = store.state.categories.find((c) => c.id === catId[0]);
-    if (!category) return;
-    color.value = category.color;
-    icon.value = category.icon;
+    color.value = category?.color ?? '#EEEEEE';
+    icon.value = category?.icon ?? '';
 });
 
 function save() {
-    // intentional
+    store
+        .dispatch(
+            categoryId.value !== 'new'
+                ? ACT_CATEGORIES_EDIT
+                : ACT_CATEGORIES_CREATE,
+            {
+                id: categoryId.value !== 'new' ? categoryId.value : null,
+                color: color.value,
+                icon: icon.value,
+                name:
+                    store.state.categories.find((c) => c.id === categoryId)
+                        ?.name ?? 'New',
+            }
+        )
+        .then(() => (categoryId.value = null));
+}
+
+function remove() {
+    if (categoryId.value === 'new') categoryId.value = null;
+    store
+        .dispatch(ACT_CATEGORIES_DELETE, {
+            id: categoryId.value,
+        })
+        .then(() => (categoryId.value = null));
 }
 </script>
 
@@ -83,11 +127,11 @@ function save() {
     flex-direction: column;
     gap: 1rem;
 }
-.edited {
+.edited * {
     font-size: 2em;
     margin: auto;
 }
-.color {
+.list {
     &-select {
         display: flex;
         flex-wrap: wrap;
@@ -96,6 +140,7 @@ function save() {
     &-item {
         width: 2em;
         height: 2em;
+        cursor: pointer;
     }
 }
 </style>

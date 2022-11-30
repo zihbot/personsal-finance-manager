@@ -1,5 +1,9 @@
 <template>
-    <div v-if="category" class="category" :style="{ backgroundColor: category.color }">
+    <div
+        v-if="category"
+        class="category"
+        :style="{ backgroundColor: category.color }"
+    >
         <i class="fa-solid" :class="category.icon"></i>
     </div>
 </template>
@@ -11,10 +15,14 @@ import { useStore } from 'vuex';
 const props = defineProps(['categoryId', 'categoryData']);
 const store = useStore();
 
-const category = props.categoryData ?? computed(() => store.state.categories.find(c => c.id === props.categoryId) ?? {
-    color: '#333333',
-    icon: 'fa-question',
-});
+const category = computed(
+    () =>
+        props.categoryData ??
+        store.state.categories.find((c) => c.id === props.categoryId) ?? {
+            color: '#333333',
+            icon: 'fa-question',
+        }
+);
 </script>
 
 <style scoped lang="scss">
@@ -26,6 +34,12 @@ const category = props.categoryData ?? computed(() => store.state.categories.fin
     .fa-solid {
         color: var(--app-light-text-color);
         translate: 0 50%;
+    }
+    &.selectable {
+        border: 1px solid transparent;
+    }
+    &.selected {
+        border: 1px solid var(--app-text-color);
     }
 }
 </style>
