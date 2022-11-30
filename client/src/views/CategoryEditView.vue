@@ -46,7 +46,7 @@
         <app-button
             v-if="categoryId"
             class="primary"
-            :disabled="!icon || !color"
+            :disabled="(!icon || !color || color === DEFAULT_COLOR)"
             @click="save()"
             >Save</app-button
         >
@@ -70,8 +70,10 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 
+const DEFAULT_COLOR = '#EEEEEE';
+
 const categoryId = ref(null) as Ref<null | string>;
-const color = ref('#EEEEEE');
+const color = ref(DEFAULT_COLOR);
 const icon = ref('');
 const category = computed(() => ({
     id: null,
@@ -79,17 +81,50 @@ const category = computed(() => ({
     icon: icon.value,
 }));
 
-const colors = ref(['#54426B', '#89B0EF', '#B0E298', '#3D3B8E']);
+const colors = ref([
+    '#54426B',
+    '#89B0EF',
+    '#B0E298',
+    '#3D3B8E',
+    '#EDEBA0',
+    '#C3C48D',
+    '#928C6F',
+    '#883677',
+    '#441151',
+    '#8F7E4F',
+    '#524632',
+    '#7F95D1',
+    '#1F7A8C',
+    '#022B3A',
+    '#395E66',
+    '#387D7A',
+    '#BC2C1A',
+    '#7D1538',
+]);
 const icons = ref([
     'fa-lightbulb',
     'fa-train-subway',
     'fa-utensils',
     'fa-cart-shopping',
+    'fa-music',
+    'fa-phone',
+    'fa-envelope',
+    'fa-gift',
+    'fa-book',
+    'fa-plane',
+    'fa-camera',
+    'fa-house',
+    'fa-tree',
+    'fa-shirt',
+    'fa-tv',
+    'fa-medal',
+    'fa-volleyball',
+    'fa-bicycle',
 ]);
 
 watch([categoryId], (catId) => {
     const category = store.state.categories.find((c) => c.id === catId[0]);
-    color.value = category?.color ?? '#EEEEEE';
+    color.value = category?.color ?? DEFAULT_COLOR;
     icon.value = category?.icon ?? '';
 });
 
@@ -135,6 +170,7 @@ function remove() {
     &-select {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 1rem;
     }
     &-item {
