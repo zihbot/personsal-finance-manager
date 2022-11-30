@@ -60,6 +60,8 @@ function save() {
                 id: transaction?.id ?? null,
                 category: categoryId.value,
                 value: Number(value.value),
+                currency: 'HUF',
+                time: new Date().toISOString(),
             }
         )
         .then(() => router.push('/transactions'));
