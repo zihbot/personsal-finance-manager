@@ -21,6 +21,12 @@
                     :category-data="category"
                 ></transaction-category>
             </div>
+            <h2>Name</h2>
+            <app-input
+                id="categoryName"
+                v-model="name"
+                autocomplete="off"
+            ></app-input>
             <h2>Color</h2>
             <div class="list-select">
                 <div
@@ -46,7 +52,7 @@
         <app-button
             v-if="categoryId"
             class="primary"
-            :disabled="(!icon || !color || color === DEFAULT_COLOR)"
+            :disabled="!icon || !color || color === DEFAULT_COLOR || !name"
             @click="save()"
             >Save</app-button
         >
@@ -57,9 +63,9 @@
 import AppActionMenu from '@/components/AppActionMenu.vue';
 import AppActionMenuItem from '@/components/AppActionMenuItem.vue';
 import AppButton from '@/components/AppButton.vue';
+import AppInput from '@/components/AppInput.vue';
 import TransactionCategory from '@/components/TransactionCategory.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
-import router from '@/router';
 import {
     ACT_CATEGORIES_CREATE,
     ACT_CATEGORIES_DELETE,
@@ -73,6 +79,7 @@ const store = useStore();
 const DEFAULT_COLOR = '#EEEEEE';
 
 const categoryId = ref(null) as Ref<null | string>;
+const name = ref('');
 const color = ref(DEFAULT_COLOR);
 const icon = ref('');
 const category = computed(() => ({
@@ -126,6 +133,7 @@ watch([categoryId], (catId) => {
     const category = store.state.categories.find((c) => c.id === catId[0]);
     color.value = category?.color ?? DEFAULT_COLOR;
     icon.value = category?.icon ?? '';
+    name.value = category?.name ?? '';
 });
 
 function save() {
@@ -138,9 +146,7 @@ function save() {
                 id: categoryId.value !== 'new' ? categoryId.value : null,
                 color: color.value,
                 icon: icon.value,
-                name:
-                    store.state.categories.find((c) => c.id === categoryId)
-                        ?.name ?? 'New',
+                name: name.value,
             }
         )
         .then(() => (categoryId.value = null));
@@ -178,5 +184,9 @@ function remove() {
         height: 2em;
         cursor: pointer;
     }
+}
+#categoryName {
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>
