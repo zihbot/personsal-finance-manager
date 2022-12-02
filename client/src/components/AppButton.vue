@@ -35,13 +35,13 @@ function handleClick(event: Event) {
     box-sizing: border-box;
     cursor: pointer;
     background-color: transparent;
-    color: var(--app-primary-color);
-    border: 1px solid var(--app-primary-color);
+    color: var(--item-color);
+    border: 1px solid var(--item-color);
     border-radius: 2rem;
 }
 .primary .btn,
 .btn.primary {
-    background-color: var(--app-primary-color);
+    background-color: var(--item-color);
     color: var(--app-text-inverse-color);
     font-weight: bolder;
 }
@@ -58,7 +58,7 @@ function handleClick(event: Event) {
     padding: 0;
     border: 1px solid var(--app-lighter-background);
     background-color: var(--app-lighter-background);
-    color: var(--app-primary-color);
+    color: var(--item-color);
     font-size: 1.2em;
     height: 100%;
     width: 100%;
@@ -66,8 +66,8 @@ function handleClick(event: Event) {
     align-items: center;
     justify-content: center;
     .primary & {
-        border: 1px solid var(--app-primary-color);
-        background-color: var(--app-primary-color);
+        border: 1px solid var(--item-color);
+        background-color: var(--item-color);
         color: var(--app-text-inverse-color);
     }
     &:hover {

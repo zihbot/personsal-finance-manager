@@ -23,7 +23,7 @@ input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border: 1px solid var(--app-primary-color);
+    border: 1px solid var(--item-color);
     border-radius: 5px;
     outline: none;
 

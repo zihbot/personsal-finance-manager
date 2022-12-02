@@ -15,7 +15,4 @@ const props = defineProps(["icon"]);
     width: 2.5em;
     height: 2.5em;
 }
-.danger {
-    --app-primary-color: var(--app-danger-color);
-}
 </style>

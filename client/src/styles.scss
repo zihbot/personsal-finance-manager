@@ -9,6 +9,8 @@
     --app-primary-color: #31934e;
     --app-danger-color: #c71505;
     --app-disabled-color: #c2c2c2;
+
+    --item-color: var(--app-primary-color);
 }
 
 body {
@@ -24,4 +26,8 @@ body {
 }
 .action {
     cursor: pointer;
+}
+
+.danger {
+    --item-color: var(--app-danger-color);
 }
