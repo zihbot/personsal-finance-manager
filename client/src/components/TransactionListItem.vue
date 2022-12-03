@@ -1,7 +1,7 @@
 <template>
     <div class="transaction">
         <transaction-category :category-id="props.transaction.category"></transaction-category>
-        <span class="transaction-value">{{props.transaction.value}}</span>
+        <span class="transaction-value">{{props.transaction.value}} Ft</span>
     </div>
 </template>
 
