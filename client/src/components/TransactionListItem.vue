@@ -1,7 +1,12 @@
 <template>
     <div class="transaction">
-        <transaction-category :category-id="props.transaction.category"></transaction-category>
-        <span class="transaction-value">{{props.transaction.value}} {{props.transaction.currency}}</span>
+        <transaction-category
+            :category-id="props.transaction.category"
+        ></transaction-category>
+        <span class="transaction-value"
+            >{{ props.transaction.value }}
+            {{ props.transaction.currency }}</span
+        >
     </div>
 </template>
 
