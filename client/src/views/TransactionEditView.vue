@@ -18,6 +18,7 @@
         <transaction-category-selector
             v-model="categoryId"
         ></transaction-category-selector>
+        <app-date-picker v-model="time"></app-date-picker>
         <app-button
             class="primary"
             v-bind:disabled="!value || !categoryId"
@@ -31,6 +32,7 @@
 import AppActionMenu from '@/components/AppActionMenu.vue';
 import AppActionMenuItem from '@/components/AppActionMenuItem.vue';
 import AppButton from '@/components/AppButton.vue';
+import AppDatePicker from '@/components/AppDatePicker.vue';
 import AppInput from '@/components/AppInput.vue';
 import TransactionCategorySelector from '@/components/TransactionCategorySelector.vue';
 import router from '@/router';
@@ -51,6 +53,7 @@ const transaction = computed(() =>
 ).value;
 const categoryId = ref(transaction ? transaction.category : null);
 const value = ref(transaction ? transaction.value : null);
+const time = ref(transaction ? transaction.time : new Date().toISOString());
 
 function save() {
     store
@@ -61,7 +64,7 @@ function save() {
                 category: categoryId.value,
                 value: Number(value.value),
                 currency: 'HUF',
-                time: new Date().toISOString(),
+                time: time.value,
             }
         )
         .then(() => router.push('/transactions'));
