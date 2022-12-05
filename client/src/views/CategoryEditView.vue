@@ -7,7 +7,7 @@
         >
         </transaction-category-selector>
         <div v-if="categoryId">
-            <app-action-menu>
+            <app-action-menu @back="categoryId = null">
                 <app-action-menu-item
                     class="danger"
                     :icon="'fa-trash'"

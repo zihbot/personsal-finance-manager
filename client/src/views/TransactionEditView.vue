@@ -1,5 +1,5 @@
 <template>
-    <app-action-menu>
+    <app-action-menu @back="router.push({name: 'transactions'})">
         <app-action-menu-item
             class="danger"
             :icon="'fa-trash'"
