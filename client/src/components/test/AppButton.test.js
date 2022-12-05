@@ -12,3 +12,9 @@ test('AppButton click', async () => {
     wrapper.find('.btn').trigger('click');
     expect(wrapper.emitted()).toHaveProperty('click');
 });
+
+test('AppButton disabled click', async () => {
+    const wrapper = shallowMount(AppButton, { slots: { default: 'Example' }, props: { disabled: true } });
+    wrapper.find('.btn').trigger('click');
+    expect(wrapper.emitted()).toStrictEqual({});
+});
