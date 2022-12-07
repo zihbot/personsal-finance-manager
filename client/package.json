@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "sonar": "yarn coverage && npx sonar-scanner -Dsonar.login=$SONAR"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^3.6.0",
@@ -24,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-vue": "^3.2.0",
+    "@vitest/coverage-c8": "^0.25.5",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
@@ -37,6 +39,7 @@
     "happy-dom": "^7.7.2",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
+    "sonar-scanner": "^3.1.0",
     "typescript": "~4.5.5",
     "vitest": "^0.25.4"
   }

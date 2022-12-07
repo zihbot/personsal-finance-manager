@@ -10,7 +10,7 @@ pipeline {
         stage('Build client') {
             steps {
                 sh "mkdir -p ${WORKSPACE}/../pfm-client-cache"
-                sh "docker run --rm -v ${WORKSPACE}/client:/app -v ${WORKSPACE}/../pfm-client-cache:/app/node_modules -w /app node:18-buster-slim /bin/bash -c 'yarn install --frozen-lockfile --prefer-offline && yarn build'"
+                sh "docker run --rm -v ${WORKSPACE}/client:/app -v ${WORKSPACE}/../pfm-client-cache:/app/node_modules -w /app node:18-buster-slim /bin/bash -c 'yarn install --frozen-lockfile --prefer-offline && yarn build && yarn sonar'"
             }
         }
         stage('Archive') {
