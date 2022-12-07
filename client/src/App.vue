@@ -1,9 +1,5 @@
 <template>
-    <nav v-if="router.currentRoute.value?.fullPath !== '/'">
-        <router-link to="/transactions">Transactions</router-link>
-        <router-link to="/category-edit">Categories</router-link>
-        <router-link to="/">Logout</router-link>
-    </nav>
+    <app-header></app-header>
     <div id="main-container">
         <router-view />
     </div>
@@ -21,6 +17,7 @@
 
 <script setup lang="ts">
 import AppFloatingActionButton from './components/AppFloatingActionButton.vue';
+import AppHeader from './components/AppHeader.vue';
 import router from './router';
 import store from './store';
 
@@ -39,18 +36,6 @@ router.beforeEach((to, from) => {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-}
-
-nav {
-    padding: 30px;
-    a {
-        padding: 1rem;
-        font-weight: bold;
-        color: #2c3e50;
-        &.router-link-exact-active {
-            color: #42b983;
-        }
-    }
 }
 
 #main-container {
