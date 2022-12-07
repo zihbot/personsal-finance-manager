@@ -1,13 +1,8 @@
 <template>
     <div v-for="(transactions, date) in groupedTransactions" :key="date">
         {{ date }}
-        <transaction-list-item
-            v-for="transaction in transactions"
-            :key="transaction.id"
-            :transaction="transaction"
-            class="item action"
-            @click="edit(transaction.id)"
-        ></transaction-list-item>
+        <transaction-list-item v-for="transaction in transactions" :key="transaction.id" :transaction="transaction"
+            class="item action" @click="edit(transaction.id)"></transaction-list-item>
     </div>
 </template>
 
@@ -24,8 +19,9 @@ const router = useRouter();
 
 const groupedTransactions = computed(() =>
     store.state.transactions.reduce((rv, tr) => {
-        (rv[format(new Date(tr.time || 0), 'yyyy-MM-dd')] =
-            rv[format(new Date(tr.time || 0), 'yyyy-MM-dd')] ?? []).push(tr);
+        const dateFormatted = format(new Date(tr.time || 0), 'yyyy-MM-dd');
+        rv[dateFormatted] = rv[dateFormatted] ?? []
+        rv[dateFormatted].push(tr);
         return rv;
     }, {})
 );

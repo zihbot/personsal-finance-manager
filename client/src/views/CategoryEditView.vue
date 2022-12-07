@@ -130,10 +130,10 @@ const icons = ref([
 ]);
 
 watch([categoryId], (catId) => {
-    const category = store.state.categories.find((c) => c.id === catId[0]);
-    color.value = category?.color ?? DEFAULT_COLOR;
-    icon.value = category?.icon ?? '';
-    name.value = category?.name ?? '';
+    const cat = store.state.categories.find((c) => c.id === catId[0]);
+    color.value = cat?.color ?? DEFAULT_COLOR;
+    icon.value = cat?.icon ?? '';
+    name.value = cat?.name ?? '';
 });
 
 function save() {
