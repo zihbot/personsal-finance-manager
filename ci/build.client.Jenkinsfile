@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        SONAR_TOKEN = credentials('SONAR')
+    }
 
     stages {
         stage('Checkout') {
@@ -10,7 +13,7 @@ pipeline {
         stage('Build client') {
             steps {
                 sh "mkdir -p ${WORKSPACE}/../pfm-client-cache"
-                sh "docker run --rm -v ${WORKSPACE}/client:/app -v ${WORKSPACE}/../pfm-client-cache:/app/node_modules -w /app zihbot/node-java:latest /bin/bash -c 'yarn install --frozen-lockfile --prefer-offline && yarn build && yarn sonar'"
+                sh "docker run --rm -v ${WORKSPACE}/client:/app -v ${WORKSPACE}/../pfm-client-cache:/app/node_modules -w /app zihbot/node-java:latest /bin/bash -c 'yarn install --frozen-lockfile --prefer-offline && yarn build && SONAR=${SONAR_TOKEN} yarn sonar'"
             }
         }
         stage('Archive') {
