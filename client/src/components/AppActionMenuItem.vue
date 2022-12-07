@@ -1,6 +1,6 @@
 <template>
     <app-button class="icon icon-button">
-        <i class="fa-solid" :class="props.icon"></i>
+        <span class="fa-solid" :class="props.icon"></span>
     </app-button>
 </template>
 

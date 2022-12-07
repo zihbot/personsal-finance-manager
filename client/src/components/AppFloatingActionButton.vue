@@ -1,6 +1,6 @@
 <template>
     <div class="fab">
-        <i v-if="props.icon" class="fa-solid" :class="props.icon"></i>
+        <span v-if="props.icon" class="fa-solid" :class="props.icon"></span>
         <slot></slot>
     </div>
 </template>

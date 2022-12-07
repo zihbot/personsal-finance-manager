@@ -4,7 +4,7 @@
         class="category"
         :style="{ backgroundColor: category.color }"
     >
-        <i class="fa-solid" :class="category.icon"></i>
+        <span class="fa-solid" :class="category.icon"></span>
     </div>
 </template>
 

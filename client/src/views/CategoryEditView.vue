@@ -45,7 +45,7 @@
                     :key="i"
                     @click="icon = iconItem"
                 >
-                    <i class="fa" :class="iconItem"></i>
+                    <span class="fa" :class="iconItem"></span>
                 </div>
             </div>
         </div>

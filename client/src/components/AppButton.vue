@@ -54,7 +54,6 @@ function handleClick(event: Event) {
     }
 }
 .icon .btn {
-    font-size: 1em;
     padding: 0;
     border: 1px solid var(--app-lighter-background);
     background-color: var(--app-lighter-background);
