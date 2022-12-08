@@ -1,14 +1,10 @@
 <template>
-    <app-header></app-header>
+    <app-header v-if="router.currentRoute.value?.fullPath !== '/'"></app-header>
     <div id="main-container">
         <router-view />
     </div>
     <app-floating-action-button
-        v-if="
-            !router.currentRoute.value?.fullPath?.startsWith?.(
-                '/transaction-edit'
-            ) && router.currentRoute.value?.fullPath !== '/'
-        "
+        v-if="showPlus"
         class="fab-page"
         :icon="'fa-plus'"
         @click="router.push('transaction-edit')"
@@ -16,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import AppFloatingActionButton from './components/AppFloatingActionButton.vue';
 import AppHeader from './components/AppHeader.vue';
 import router from './router';
@@ -24,6 +21,11 @@ import store from './store';
 router.beforeEach((to, from) => {
     if (store.state.userId === null && to.name !== 'login')
         return { name: 'login' };
+});
+
+const showPlus = computed(() => {
+    const path = router.currentRoute.value?.fullPath;
+    return path !== '/' && !path?.startsWith?.('/transaction-edit');
 });
 </script>
 
