@@ -69,6 +69,32 @@
                     "min": "",
                     "max": ""
                 }
+            },
+            {
+                "id": "0oudzvnc",
+                "name": "source",
+                "type": "relation",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "collectionId": "zzoqsmiarvoks6f",
+                    "cascadeDelete": false
+                }
+            },
+            {
+                "id": "rkhuipnj",
+                "name": "target",
+                "type": "relation",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "collectionId": "zzoqsmiarvoks6f",
+                    "cascadeDelete": false
+                }
             }
         ],
         "listRule": "user = @request.auth.id",
@@ -199,5 +225,57 @@
             "onlyEmailDomains": null,
             "requireEmail": true
         }
+    },
+    {
+        "id": "zzoqsmiarvoks6f",
+        "name": "accounts",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "ajorl0et",
+                "name": "user",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "collectionId": "systemprofiles0",
+                    "cascadeDelete": false
+                }
+            },
+            {
+                "id": "gxb5uoqj",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "thqfy6ia",
+                "name": "balance",
+                "type": "number",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null
+                }
+            }
+        ],
+        "listRule": "user = @request.auth.id",
+        "viewRule": "user = @request.auth.id",
+        "createRule": "user = @request.auth.id",
+        "updateRule": "user = @request.auth.id",
+        "deleteRule": "user = @request.auth.id",
+        "options": {}
     }
 ]
