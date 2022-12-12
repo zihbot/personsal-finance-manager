@@ -1,6 +1,7 @@
 <template>
     <div class="menu-row">
         <app-action-menu-item
+            id="menu-back"
             :icon="'fa-arrow-left'"
             v-if="props.hasBack"
             @click="emit('back')"
