@@ -8,6 +8,7 @@ import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"zihbot.eu/pfm/main/cmd"
+	"zihbot.eu/pfm/main/transactions"
 )
 
 func main() {
@@ -19,6 +20,8 @@ func main() {
 	})
 
 	app.RootCmd.AddCommand(cmd.NewSchemaCommand(app))
+
+	transactions.Register(app)
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
